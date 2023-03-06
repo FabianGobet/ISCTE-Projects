@@ -1,0 +1,11 @@
+window_sizes 1920 1001 450 1464 815 128
+
+diagrams
+  active  classdiagram_ref 128003 // Reflexiva
+    1464 815 100 A3 0 0
+end
+show_stereotypes
+open
+  class_ref 128003 // Area
+end
+end

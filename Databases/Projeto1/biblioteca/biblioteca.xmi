@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.3" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+	<xmi:Documentation exporter="Bouml" exporterVersion="5.1"/>
+	<uml:Model xmi:type="uml:Model" xmi:id="themodel" name="biblioteca">
+		<packagedElement xmi:type="uml:Package" xmi:id="BOUML_0x81_22" name ="biblioteca">
+			<xmi:Extension extender="Bouml">
+				<taggedValue tag="gxmi gen extensions" value="yes"/>
+				<taggedValue tag="gxmi comment exporter" value="no"/>
+				<taggedValue tag="gxmi primitive type" value="no"/>
+				<taggedValue tag="gxmi umlversion" value="23"/>
+				<taggedValue tag="gxmi gen eclipse" value="no"/>
+				<taggedValue tag="gxmi path" value="C:/Users/fabia/Desktop/ISCTE/BD/Projeto BD/Projeto1/biblioteca/biblioteca.xmi"/>
+				<taggedValue tag="gxmi vis prefix" value="no"/>
+				<taggedValue tag="gxmi no model" value="no"/>
+				<taggedValue tag="gxmi linefeed" value="no"/>
+				<taggedValue tag="gxmi gen views" value="no"/>
+				<taggedValue tag="gxmi pk prefix" value="no"/>
+				<taggedValue tag="gxmi encoding" value="UTF-8"/>
+			</xmi:Extension>
+			<packagedElement xmi:type="uml:Class" name="Publicacao" xmi:id="BOUML_0x1f403_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="NumeroInterno" xmi:id="BOUML_0x1f403_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Titulo" xmi:id="BOUML_0x1f483_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Subtitulo" xmi:id="BOUML_0x1f503_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="TituloAbreviado" xmi:id="BOUML_0x1f583_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_2"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="ImagemAmpliadaLink" xmi:id="BOUML_0x1f703_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_3"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="ImagemMiniaturaLink" xmi:id="BOUML_0x1f783_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_3"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Descricao" xmi:id="BOUML_0x1f803_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_4"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Autores" xmi:id="BOUML_0x1fa03_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_3"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="NumeroPaginas" xmi:id="BOUML_0x1fa83_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="DataPublicacao" xmi:id="BOUML_0x1fb03_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_5"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="DataAquisicao" xmi:id="BOUML_0x21883_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_5"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Editora" xmi:id="BOUML_0x1f483_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="IDEditora" xmi:id="BOUML_0x1f603_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Nome" xmi:id="BOUML_0x1f683_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Livro_Edicao" xmi:id="BOUML_0x1f803_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="ISBN" xmi:id="BOUML_0x1fd03_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+				<ownedRule xmi:type="uml:Constraint" xmi:id="BOUML_CONSTRAINT_0x1fd03_1" constrainedElement="BOUML_0x1fd03_1">
+					<specification xmi:type="uml:OpaqueExpression" xmi:id="BOUML_CSPEC_0x1fd03_1">
+						<body>unique</body>
+					</specification>
+				</ownedRule>
+				<ownedAttribute xmi:type="uml:Property" name="Edicao" xmi:id="BOUML_0x24f03_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+				<generalization xmi:type="uml:Generalization" xmi:id="BOUML_0x25783_0" general="BOUML_0x1f403_4"/>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Periodico" xmi:id="BOUML_0x1f883_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="ISSN" xmi:id="BOUML_0x1fd83_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Periodicidade" xmi:id="BOUML_0x1f903_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="IDPeriodo" xmi:id="BOUML_0x1fe03_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Designacao" xmi:id="BOUML_0x1fe83_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="AreaTematica" xmi:id="BOUML_0x21303_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="AreaID" xmi:id="BOUML_0x21b03_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+					<xmi:Extension extender="Bouml"><stereotype name="primary key"/></xmi:Extension>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Designacao" xmi:id="BOUML_0x21b83_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_3"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="PublicacaoTema" xmi:id="BOUML_0x21383_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="Relevancia" xmi:id="BOUML_0x21803_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="PalavrasChave" xmi:id="BOUML_0x21403_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="Tag" xmi:id="BOUML_0x21903_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_2"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Capitulo" xmi:id="BOUML_0x21483_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="Nome" xmi:id="BOUML_0x23583_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="TagNoLivro" xmi:id="BOUML_0x21503_4" visibility="package">
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Artigo" xmi:id="BOUML_0x21583_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="Nome" xmi:id="BOUML_0x23503_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Feed" xmi:id="BOUML_0x21703_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="URL" xmi:id="BOUML_0x21983_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_3"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" name="Endereço" xmi:id="BOUML_0x23083_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="Link" xmi:id="BOUML_0x25003_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_1"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_5" name="date"/>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_0" name="integer"/>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_1" name="varchar(100)"/>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_3" name="varchar(150)"/>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_4" name="varchar(200)"/>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_2" name="varchar(50)"/>
+		</packagedElement>
+	</uml:Model>
+</xmi:XMI>

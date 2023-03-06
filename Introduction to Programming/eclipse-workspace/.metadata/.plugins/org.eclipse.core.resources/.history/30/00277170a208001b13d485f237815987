@@ -1,0 +1,38 @@
+class Functions {
+	
+	
+	//A
+	static int square(int x){ 	
+		int a= x*x;
+		return a;
+	}
+	
+	
+	//B
+	static int dif(int x, int y){
+		return x-y;
+	}
+	
+	
+	//C
+	static double reason(int n, int total){
+		return (double)(n)/total;
+	}
+	
+	
+	//D
+	static int round(double x){
+		double a = x%1;
+		if(a>=5){
+			int b = (int)(b-a+1)
+		} else {
+			int b = (int)(b-a);
+		}
+	}
+		
+	
+
+
+
+	
+}

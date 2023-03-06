@@ -1,0 +1,12 @@
+class Functions {
+	
+	static int square(int x){
+		
+		int a = x*x;
+		
+		return a;
+	}
+	
+	
+
+}

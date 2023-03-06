@@ -1,0 +1,3 @@
+Sim,existe Relay Agent.
+Servidor DHCP: 10.10.16.98
+Relay Agent: 10.10.16.1 (Endereço de Gateway do host que envia o pacote DHCP)

@@ -1,0 +1,12 @@
+window_sizes 1920 1001 450 1464 843 104
+
+diagrams
+  active  classdiagram_ref 128003 // biblioteca
+    1465 865 100 A2 0 0
+end
+show_stereotypes
+selected classdiagram_ref 128003 // biblioteca
+open
+  classview_ref 128003 // biblioteca
+end
+end

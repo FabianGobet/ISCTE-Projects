@@ -1,0 +1,27 @@
+class Fucntions {
+	
+	static int square(int x){
+		return x*x;
+	}
+	
+	static int dobro(int x){
+		return x+x;
+	}
+	
+	static int diferenca(int x, int y){
+		return x-y;
+	}
+	
+	static double percentage (int n, int total){
+		return n/total;
+	}
+	
+	static double media(int a, int b){
+		return (a+b)/2;
+	}
+	
+	static int round(double a){
+		return Math.round(a);
+	}
+
+}

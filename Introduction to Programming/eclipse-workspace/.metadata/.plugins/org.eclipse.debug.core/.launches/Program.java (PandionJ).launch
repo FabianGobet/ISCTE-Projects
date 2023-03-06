@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="Program"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="teste"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.STOP_IN_MAIN" value="false"/>
+</launchConfiguration>

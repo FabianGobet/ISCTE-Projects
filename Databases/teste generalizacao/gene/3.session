@@ -1,0 +1,18 @@
+window_sizes 1920 1017 450 1464 859 104
+
+diagrams
+  active  classdiagram_ref 128131 // gene
+    1464 859 100 A4 0 0
+end
+show_stereotypes
+marked
+  classrelation_ref 128643 // <generalisation>
+  classrelation_ref 128771 // <generalisation>
+end
+selected classrelation_ref 128771 // <generalisation>
+open
+  class_ref 128131 // Empresa
+  class_ref 128259 // Proprio
+  class_ref 128387 // Outrem
+end
+end

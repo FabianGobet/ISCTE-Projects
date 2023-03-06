@@ -1,0 +1,13 @@
+Release:
+- PC envia DHCP Release com endereço IP de Broadcast
+- Pacote DHCP passa a ser Unicast quando passa pelo Relay-Agent (Router)
+- Servidores DHCP que recebem a trama fazem o lease desse endereço
+
+Renew:
+- PC envia DHCP Discover com endereço IP origem 0.0.0.0 e endereço IP destino 255.255.255.255, MAC Origem = MAC do PC que envia a trama
+- Pacote passa a ser Unicast quando passa pelo Relay-Agent (Router)
+- Servidores DHCP que recebem a trama DHCP Discover e verificam que já existe um host com esse MAC na tabela
+- Servidores mandam um pacote ICMP para verificar que não existe nenhum host com esse IP
+- Caso não recebam resposta desse Ping mandam DHCP Offer com o IP que estava anteriormente atribuído a esse host
+- PC recebe a Offer e envia DHCP Request
+- Quando o DHCP Request chega ao servidor DHCP, esse envia um DHCP ACK

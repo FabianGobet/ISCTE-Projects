@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.3" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1">
+	<xmi:Documentation exporter="Bouml" exporterVersion="5.1"/>
+	<uml:Model xmi:type="uml:Model" xmi:id="themodel" name="Reflexiva">
+		<packagedElement xmi:type="uml:Package" xmi:id="BOUML_0x81_22" name ="Reflexiva">
+			<xmi:Extension extender="Bouml">
+				<taggedValue tag="gxmi gen extensions" value="yes"/>
+				<taggedValue tag="gxmi comment exporter" value="no"/>
+				<taggedValue tag="gxmi primitive type" value="no"/>
+				<taggedValue tag="gxmi umlversion" value="23"/>
+				<taggedValue tag="gxmi gen eclipse" value="no"/>
+				<taggedValue tag="gxmi path" value="C:/Users/fabia/Desktop/ISCTE/BD/Aulas/Projeto BD/Teste reflexiva/reflect.xmi"/>
+				<taggedValue tag="gxmi vis prefix" value="no"/>
+				<taggedValue tag="gxmi no model" value="no"/>
+				<taggedValue tag="gxmi linefeed" value="no"/>
+				<taggedValue tag="gxmi gen views" value="no"/>
+				<taggedValue tag="gxmi pk prefix" value="no"/>
+				<taggedValue tag="gxmi encoding" value="UTF-8"/>
+			</xmi:Extension>
+			<packagedElement xmi:type="uml:Class" name="Area" xmi:id="BOUML_0x1f403_4" visibility="package">
+				<ownedAttribute xmi:type="uml:Property" name="Designacao" xmi:id="BOUML_0x1f403_1" visibility="private">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_datatype_0"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Principal" xmi:id="BOUML_0x1f403_0" visibility="private" association="BOUML_ASSOC_0x1f403_0" aggregation="none">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f403_4"/>
+					<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f403_0" value="0"/>
+					<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f403_0" value="1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" name="Subarea" xmi:id="BOUML_0x1f483_0" visibility="private" association="BOUML_ASSOC_0x1f403_0" aggregation="none">
+					<type xmi:type="uml:Class" xmi:idref="BOUML_0x1f403_4"/>
+					<lowerValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_L_0x1f483_0" value="*"/>
+					<upperValue xmi:type="uml:LiteralString" xmi:id="BOUML_MULTIPLICITY_U_0x1f483_0" value="*"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Association" xmi:id="BOUML_ASSOC_0x1f403_0" visibility="private">
+				<memberEnd xmi:idref="BOUML_0x1f403_0"/>
+				<memberEnd xmi:idref="BOUML_0x1f483_0"/>
+			</packagedElement>
+			<packagedElement xmi:type="uml:DataType" xmi:id="BOUML_datatype_0" name="varchar(100)"/>
+		</packagedElement>
+	</uml:Model>
+</xmi:XMI>

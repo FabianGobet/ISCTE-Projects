@@ -1,0 +1,75 @@
+class Objetos {
+	
+	static Color randomColor(){
+		int r = (int)(Math.random()*256);
+		int g = (int)(Math.random()*256);
+		int b = (int)(Math.random()*256);
+		Color cor = new Color(r,g,b);
+		return cor;
+	}
+
+	  static Color[] randomColorArray(int length) {
+		  Color[] cores = new Color[length];
+		  for(int i=0; i<length; i++)
+			  cores[i] = randomColor();
+		  return cores;
+	  }
+	  
+	  static Color inverted(Color color) {
+		  Color cor = new Color(255-color.getR(), 255-color.getG(), 255-color.getB());
+		  return cor;
+	  }
+	  
+	  
+	  static Color changeBrightness (Color color, int factor) {
+		  int r = color.getR();
+		  int g = color.getG();
+		  int b = color.getB();
+		  return new Color(r+factor, g+factor, b+factor);
+	  }
+	  
+	  
+	  static BinaryImage randomSizedImg(int length, int height){
+		  BinaryImage img = new BinaryImage(length, height);
+		  for(int i=0; i<length; i++)
+			  for(int j=0; j<height; j++)
+				  if(Math.random() < 0.5)
+					  img.setWhite(i,j);
+		  return img;
+	  }
+	  
+	  static void paintSquare(BinaryImage img, int x, int y, int side){
+		  for(int i=x; i<x+side; i++)
+			  for(int j=y; j<y+side; j++)
+				  img.setWhite(i,j);
+	  }
+	  
+	  static void paintPortrait(BinaryImage img){
+		  for(int i=0; i<img.getWidth(); i++){
+			  img.setBlack(i,img.getHeight()-1);
+			  img.setBlack(i,0);
+		  }
+		  for(int j=1; j<img.getHeight()-1; j++){
+			  img.setBlack(0,j);
+			  img.setBlack(img.getWidth()-1,j);
+		  }
+	  }
+	  
+	  
+	  static BinaryImage createChessBoard(int size){
+		  BinaryImage img = new BinaryImage(8*size+2,8*size+2);
+		  for(int i=1; i<9; i++)
+			  if(i%2!=0){
+				  for(int j=1; j<img.getWidth()-1; j+=2*size)
+					  paintSquare(img,j,(i-1)*size+1,size);
+			  }
+		  return img;
+	  }
+		  
+		  
+	  
+	  static void test(){
+		  BinaryImage img = createChessBoard(40);
+		  int a=0;
+	  }
+}

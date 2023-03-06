@@ -1,0 +1,21 @@
+class Functions {
+	
+	
+	//A
+	static int square(int x){ 
+		return x*x;
+	}
+	
+	
+	//B
+	static int dif(int x, int y){
+		return x-y;
+	}
+	
+	
+	//C
+
+
+
+	
+}

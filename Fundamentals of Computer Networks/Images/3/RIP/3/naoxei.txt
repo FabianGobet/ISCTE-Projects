@@ -1,0 +1,2 @@
+Nos momentos logo a seguir ao corte, o envio do pacote falha pois ainda não foram atulizados os encaminhamentos entre os routers.
+Após esperar 30 segundos (tempo default que entre routing updates) o router fica a conhecer outro caminho para chegar ao mesmo destino, entregando assim o pacote.

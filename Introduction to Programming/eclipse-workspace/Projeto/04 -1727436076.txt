@@ -1,0 +1,91 @@
+PandionJ Error Report
+
+java.lang.NumberFormatException : For input string: "Index 20 out of bounds for length 20"
+
+Exception trace: 
+
+java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+java.base/java.lang.Integer.parseInt(Integer.java:652)
+java.base/java.lang.Integer.<init>(Integer.java:1105)
+pt.iscte.pandionj.figures.StackFrameFigure$2.update(StackFrameFigure.java:103)
+pt.iscte.pandionj.figures.StackFrameFigure$2.update(StackFrameFigure.java:1)
+pt.iscte.pandionj.model.DisplayUpdateObservable$1.update(DisplayUpdateObservable.java:24)
+pt.iscte.pandionj.model.ObserverContainer.notifyObservers(ObserverContainer.java:37)
+pt.iscte.pandionj.model.DisplayUpdateObservable.notifyObservers(DisplayUpdateObservable.java:47)
+pt.iscte.pandionj.model.StackFrameModel.processException(StackFrameModel.java:406)
+pt.iscte.pandionj.PandionJView.lambda$1(PandionJView.java:247)
+pt.iscte.pandionj.PandionJView.executeInternal(PandionJView.java:327)
+pt.iscte.pandionj.extensibility.PandionJUI.lambda$1(PandionJUI.java:136)
+org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:40)
+org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:185)
+org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3933)
+org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3564)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
+org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
+org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:628)
+org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:563)
+org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:151)
+org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:155)
+org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:199)
+org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:391)
+org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:246)
+java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+java.base/java.lang.reflect.Method.invoke(Method.java:566)
+org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
+org.eclipse.equinox.launcher.Main.basicRun(Main.java:595)
+org.eclipse.equinox.launcher.Main.run(Main.java:1501)
+Error code: -1727436076
+
+User code: 
+
+/**
+ * Represents color images.
+ * Image data is represented as a matrix:
+ * - the number of lines corresponds to the image height (data.length)
+ * - the length of the lines corresponds to the image width (data[*].length)
+ * - pixel color is encoded as integers (ARGB)
+ */
+class ColorImage {
+
+	private int[][] data; // @colorimage
+
+	ColorImage(String file) {
+		this.data = ImageUtil.readColorImage(file);
+	}
+
+	ColorImage(int width, int height) {
+		data = new int[height][width];
+	}
+
+	int getWidth() {
+		return data[0].length;
+	}
+
+	int getHeight() {
+		return data.length;
+	}
+
+	void setColor(int x, int y, Color c) {
+>>>>		data[y][x] = ImageUtil.encodeRgb(c.getR(), c.getG(), c.getB());
+	}
+
+	Color getColor(int x, int y) {
+		int[] rgb = ImageUtil.decodeRgb(data[y][x]);
+		return new Color(rgb[0], rgb[1], rgb[2]);
+	}
+}
+
+
+Call stack:
+
+test()
+noWhiteCopy(imgcopy, imgpaste, 17, 17)
+setColor(17, 20, c)
+

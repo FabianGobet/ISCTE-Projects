@@ -1,0 +1,4 @@
+Quando o PC acede ao website definido anteriormente é enviado um pacote do tipo HTTP Request
+Quando este pacote chega ao servidor HTTP, este verifica se contém a página indicada no pacote Request.
+Se a página não existir no servidor, este envia um HTTP Response com uma mensagem de erro.
+Se a página existir no servidor, este envia um HTTP Response com as informações da página web.

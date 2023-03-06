@@ -1,0 +1,8 @@
+class exercicios {
+
+	static void test(){
+	Color cor = new Color(30,40,50);
+	Color cor2 = cor.brighter(40);
+	}
+	
+}

@@ -1,0 +1,15 @@
+window_sizes 1924 1061 255 1664 949 66
+
+diagrams
+  active  classdiagram_ref 128003 // biblioteca
+    2139 1151 80 A1 85 0
+end
+show_stereotypes
+selected 
+package_ref 129 // biblioteca
+open
+  class_ref 128003 // Publicacao
+  class_ref 143491 // Endereço
+  class_ref 150019 // Autor
+end
+end

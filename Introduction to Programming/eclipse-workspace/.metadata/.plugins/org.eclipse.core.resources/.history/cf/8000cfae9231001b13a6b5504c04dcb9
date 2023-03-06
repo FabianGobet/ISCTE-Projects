@@ -1,0 +1,35 @@
+class Image {
+	
+	private int[][] data;
+	
+	Image(String file){
+		this.data = ImageUtil.readColorImage(file);
+	}
+	
+	
+	Image(int linhas, int colunas) {
+		data = new int[colunas][linhas];
+	}
+	
+	int getWidth() {
+		return data[0].length;
+	}
+	
+	
+	int getHeight() {
+		return data.length;
+	}
+	
+	void setColor(int x, int y, Color cor) {
+		data[y][x] = ImageUtil.encodeRgb(cor.getR(), cor.getG(), cor.getB());
+	}
+
+	Color getColor(int x, int y) {
+		int[] rgb = ImageUtil.decodeRgb(data[y][x]);
+		return new Color(rgb[0], rgb[1], rgb[2]);
+	}
+	
+	
+	
+
+}

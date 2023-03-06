@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="matrizes"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Semana6"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.STOP_IN_MAIN" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-javaagent:&quot;C:/Users/fabia/Desktop/eclipse/plugins/pt.iscte.pandionj.launcher_0.4.0/lib/agent.jar=matrizes|testi()|()[[I&quot; -Djava.awt.headless=true -ea"/>
+</launchConfiguration>

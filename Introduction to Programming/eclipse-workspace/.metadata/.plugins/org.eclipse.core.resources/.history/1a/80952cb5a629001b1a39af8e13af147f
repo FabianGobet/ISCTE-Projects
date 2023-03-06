@@ -1,0 +1,17 @@
+class Objetos {
+	
+	static Color randomColor(){
+		int r = (int)(Math.random()*256);
+		int g = (int)(Math.random()*256);
+		int b = (int)(Math.random()*256);
+		Color cor = new Color(r,g,b);
+		return cor;
+	}
+
+	  static Color[] randomColorArray(int length) {
+		  Color[] cores = new Color[length];
+		  for(int i=0; i<length; i++)
+			  cores[i] = randomColor();
+		  return cores;
+	  }
+}

@@ -1,0 +1,56 @@
+class Image {
+	
+	static boolean isEqualTo(Color cor1, Color cor2){
+		return cor1.getR()==cor2.getR() && cor1.getR()==cor2.getR() && cor1.getR()==cor2.getR();
+	}
+		
+		
+	// copy non-transparent from imgcopy to imgpaste, starting in x,y pixels	
+	static void noWhiteCopy(ColorImage imgcopy, ColorImage imgpaste, int x, int y){
+		
+			if(x+imgcopy.getWidth()>imgpaste.getWidth())
+				throw new IllegalStateException("First image doesnt fit in frame.\nWidth surpassed.");
+			else if(y+imgcopy.getHeight()>imgpaste.getHeight())
+				throw new IllegalStateException("First image doesnt fit in frame.\nHeight surpassed.");
+			
+			for(int i=0; i<imgcopy.getWidth(); i++)
+				for(int j=0; j<imgcopy.getHeight(); j++)
+					if(!isEqualTo(imgcopy.getColor(i,j), new Color(255,255,255)))
+							imgpaste.setColor(x+i,y+j,imgcopy.getColor(i,j));					
+	}
+	
+	// copy non-transparent from imgcopy to imgpaste, starting in 0,0 pixels	
+		static void noWhiteCopy(ColorImage imgcopy, ColorImage imgpaste){
+			noWhiteCopy(imgcopy, imgpaste, 0, 0);
+		}
+		
+		
+		//create image with img pattern, size length x and height y
+		static ColorImage background(int x, int y, ColorImage img){
+			ColorImage nova = new ColorImage(x,y);
+			for(int i=0; i<x; i++)
+				for(int j=0; j<y; j++)
+					nova.setColor(i, j, img.getColor(i%img.getHeight(), j%img.getWidth()));
+			return nova;
+		}
+	
+	
+	
+		
+		
+	static void test(){
+//	Color cor1 = new Color(3,2,1);	
+//	Color cor2 = new Color(4,2,1);	
+//	boolean isit = isEqualTo(cor1,cor2);
+//	ColorImage img1 = new ColorImage(10,10);
+//	ColorImage img2 = new ColorImage(20,20);
+//	for(int i=6; i<19; i++)
+//		for(int j=6; j<19; j++)
+//			img2.setColor(i,j, new Color(255,255,255));
+//	noWhiteCopy(img1, img2);
+//		ColorImage img3 = new ColorImage(10,10);
+//		ColorImage img4 = new ColorImage(10,9);
+//		noWhiteCopy(img3, img4);
+	}
+
+}
