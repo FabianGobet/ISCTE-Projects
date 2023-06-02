@@ -1,0 +1,57 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block custom-imports %}
+<script src="{% static 'scripts/saleslist.js' %}"></script>
+{% endblock %}
+
+{% block title %} Lista de Vendas{% endblock %}
+{% block nav-bar-title %} Lista de Vendas {% endblock %}
+
+{% block main-content %}
+
+
+    <div class="container mt-3">
+      <h1 class="mb-5">Vendas</h1>
+
+      <div class="filter-buttons mb-3">
+        <button class="btn btn-primary filter-button" data-filter="all">Tudo</button>
+        <button class="btn btn-primary filter-button" data-filter="enviado">Enviado</button>
+        <button class="btn btn-primary filter-button" data-filter="nao-enviado">Não Enviado</button>
+      </div>
+
+      <table class="table table-hover" id="myTable" 
+      data-toggle="table" 
+      data-pagination="true" 
+      data-page-size="10" 
+      data-pagination-loop="false"
+      data-sortable="true"
+      data-search="true">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th data-sortable="true">Data</th>
+            <th data-sortable="true">Preco Total</th>
+            <th>Reserva</th>
+            <th data-sortable="true" >Enviado</th>
+            <th>Detalhes</th>
+          </tr>
+        </thead>
+        <tbody id="items-table-body">
+          {% for x in vendas %}
+          <tr> 
+              <td>{{ x.id}}</td> 
+              <td>{{ x.Cliente.User.username }}</td>
+              <td data-date="{{ x.Data|date:'Y-m-d H:i:s' }}">{{ x.Data }}</td>
+              <td>{{ x.Preco_Total }}</td>
+              <td>{{ x.Reserva.id }}</td>
+              <td class = "enviado"> {% if x.Enviado %} Sim {% else %} Nao {% endif %}</td>
+              <td><a href="{% url 'store:saledetails' x.id %}">Ver</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+{% endblock %}

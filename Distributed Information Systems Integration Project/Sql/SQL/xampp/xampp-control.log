@@ -1,0 +1,56 @@
+15:17:14  [main] 	Initializing Control Panel
+15:17:14  [main] 	Windows Version:  Enterprise  64-bit
+15:17:14  [main] 	XAMPP Version: 8.2.0
+15:17:14  [main] 	Control Panel Version: 3.3.0  [ Compiled: Apr 6th 2021 ]
+15:17:14  [main] 	Running with Administrator rights - good!
+15:17:14  [main] 	XAMPP Installation Directory: "c:\users\workstation\desktop\xampp\"
+15:17:14  [main] 	Checking for prerequisites
+15:17:14  [main] 	All prerequisites found
+15:17:14  [main] 	Initializing Modules
+15:17:14  [Apache] 	Apache Service detected with wrong path
+15:17:14  [Apache] 	Change XAMPP Apache and Control Panel settings or
+15:17:14  [Apache] 	Uninstall/disable the other service manually first
+15:17:14  [Apache] 	Found Path: "D:\xampp\apache\bin\httpd.exe" -k runservice
+15:17:14  [Apache] 	Expected Path: "c:\users\workstation\desktop\xampp\apache\bin\httpd.exe" -k runservice
+15:17:14  [Apache] 	XAMPP Apache is already running on port 443
+15:17:14  [mysql] 	MySQL Service detected with wrong path
+15:17:14  [mysql] 	Change XAMPP MySQL and Control Panel settings or
+15:17:14  [mysql] 	Uninstall/disable the other service manually first
+15:17:14  [mysql] 	Found Path: D:\xampp\mysql\bin\mysqld.exe --defaults-file=d:\xampp\mysql\bin\my.ini mysql
+15:17:14  [mysql] 	Expected Path: c:\users\workstation\desktop\xampp\mysql\bin\mysqld.exe --defaults-file=c:\users\workstation\desktop\xampp\mysql\bin\my.ini mysql
+15:17:14  [mysql] 	XAMPP MySQL is already running on port 3306
+15:17:14  [main] 	The FileZilla module is disabled
+15:17:14  [main] 	The Mercury module is disabled
+15:17:14  [main] 	Starting Check-Timer
+15:17:14  [main] 	Control Panel Ready
+01:35:46  [main] 	Deinitializing Modules
+01:35:46  [main] 	Deinitializing Control Panel
+
+20:11:55  [main] 	Initializing Control Panel
+20:11:55  [main] 	Windows Version:  Enterprise  64-bit
+20:11:55  [main] 	XAMPP Version: 8.2.0
+20:11:55  [main] 	Control Panel Version: 3.3.0  [ Compiled: Apr 6th 2021 ]
+20:11:55  [main] 	Running with Administrator rights - good!
+20:11:55  [main] 	XAMPP Installation Directory: "c:\users\workstation\desktop\xampp\"
+20:11:55  [main] 	Checking for prerequisites
+20:11:55  [main] 	All prerequisites found
+20:11:55  [main] 	Initializing Modules
+20:11:55  [Apache] 	Apache Service detected with wrong path
+20:11:55  [Apache] 	Change XAMPP Apache and Control Panel settings or
+20:11:55  [Apache] 	Uninstall/disable the other service manually first
+20:11:55  [Apache] 	Found Path: "D:\xampp\apache\bin\httpd.exe" -k runservice
+20:11:55  [Apache] 	Expected Path: "c:\users\workstation\desktop\xampp\apache\bin\httpd.exe" -k runservice
+20:11:55  [Apache] 	XAMPP Apache is already running on port 443
+20:11:55  [mysql] 	MySQL Service detected with wrong path
+20:11:55  [mysql] 	Change XAMPP MySQL and Control Panel settings or
+20:11:55  [mysql] 	Uninstall/disable the other service manually first
+20:11:55  [mysql] 	Found Path: D:\xampp\mysql\bin\mysqld.exe --defaults-file=d:\xampp\mysql\bin\my.ini mysql
+20:11:55  [mysql] 	Expected Path: c:\users\workstation\desktop\xampp\mysql\bin\mysqld.exe --defaults-file=c:\users\workstation\desktop\xampp\mysql\bin\my.ini mysql
+20:11:55  [mysql] 	XAMPP MySQL is already running on port 3306
+20:11:55  [main] 	The FileZilla module is disabled
+20:11:55  [main] 	The Mercury module is disabled
+20:11:55  [main] 	Starting Check-Timer
+20:11:55  [main] 	Control Panel Ready
+01:27:59  [main] 	Deinitializing Modules
+01:27:59  [main] 	Deinitializing Control Panel
+

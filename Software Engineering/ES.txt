@@ -1,0 +1,19 @@
+
+
+
+-fazer o fetch de informação via webcal
+-definir uma representação json
+-conversão da webcal para json
+-conversão de json para csv
+-pesquisar diferentes bibliotecas e estabelecer um plano de abordagem
+-desenhar/planear uma interface em flutter para as funcionalidades em requesito no projeto
+-criar uma estrutura para horarios em flutter #####
+-testar o load e integração dos JSON/CSV para o horario flutter
+-integrar o horário flutter na interface flutter
+-implementar as funcionalidades de seleção e filtragem para turnos e UC's
+-implementar alertas de sobreposição e sobrelotação
+-implementar a funcionalidade de load dos horarios via ficheiro local, url, etc
+-implementar a gravação do horário final escolhido (JSON/CSV)
+-implementar testes para o código
+
+

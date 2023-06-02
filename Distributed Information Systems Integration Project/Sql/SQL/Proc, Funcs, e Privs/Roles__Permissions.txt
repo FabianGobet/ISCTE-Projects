@@ -1,0 +1,187 @@
+DROP ROLE IF EXISTS AppAdmin;
+DROP ROLE IF EXISTS Investigador;
+DROP ROLE IF EXISTS Java;
+DROP ROLE IF EXISTS Tecnico;
+
+CREATE ROLE AppAdmin;
+--TABLES
+GRANT SELECT ON micelab.alerta TO AppAdmin;
+GRANT ALL ON micelab.configuracaolabirinto TO AppAdmin;
+GRANT ALL ON micelab.corredor TO AppAdmin;
+GRANT SELECT, INSERT ON micelab.experiencia TO AppAdmin;
+GRANT SELECT ON micelab.log TO AppAdmin;
+GRANT SELECT ON micelab.medicaopassagem TO AppAdmin;
+GRANT SELECT ON micelab.medicaosala TO AppAdmin;
+GRANT SELECT ON micelab.medicaotemperatura TO AppAdmin;
+GRANT ALL ON micelab.odor TO AppAdmin;
+GRANT SELECT ON micelab.odorexperiencia TO AppAdmin;
+GRANT SELECT ON micelab.parametrosadicionais TO AppAdmin;
+GRANT ALL ON micelab.substancia TO AppAdmin;
+GRANT SELECT ON micelab.substanciaexperiencia TO AppAdmin;
+GRANT ALL ON micelab.tipoalerta TO AppAdmin;
+GRANT ALL ON micelab.tipoutilizador TO AppAdmin;
+GRANT SELECT ON micelab.utilizador TO AppAdmin;
+GRANT SELECT ON micelab.erroexperiencia TO AppAdmin;
+--VIEWS
+GRANT SELECT ON micelab.javaop TO AppAdmin;
+GRANT SELECT ON micelab.alertas TO AppAdmin;
+GRANT SELECT ON micelab.parametrosjavaop TO AppAdmin;
+GRANT SELECT ON micelab.javaop TO AppAdmin;
+--PROCEDURES
+GRANT EXECUTE ON PROCEDURE micelab.consultarInformaçãoPessoal TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteLogicoExperiencia TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteSubstanciaExperiencia  TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteOdoresExperiencia  TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteUtilizador  TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.resetDadosExperiencia TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.mudarOutraExperiencia TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.mudarOutroUser TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.mudarProprioUser TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.criarUtilizador TO AppAdmin;
+--FUNCTIONS
+GRANT EXECUTE ON FUNCTION micelab.checkUsernameExiste TO AppAdmin;
+
+
+CREATE ROLE Investigador;
+--TABLES
+GRANT SELECT ON micelab.configuracaolabirinto TO Investigador;
+GRANT SELECT ON micelab.corredor TO Investigador;
+GRANT SELECT ON micelab.experiencia TO Investigador;
+GRANT SELECT ON micelab.medicaopassagem TO Investigador;
+GRANT SELECT ON micelab.medicaosala TO Investigador;
+GRANT SELECT ON micelab.log TO Investigador;
+GRANT SELECT ON micelab.medicaotemperatura TO Investigador;
+GRANT SELECT ON micelab.odor TO Investigador;
+GRANT SELECT ON micelab.odorexperiencia TO Investigador;
+GRANT SELECT ON micelab.substancia TO Investigador;
+GRANT SELECT ON micelab.substanciaexperiencia TO Investigador;
+GRANT SELECT ON micelab.tipoalerta TO Investigador;
+GRANT SELECT ON micelab.erroexperiencia TO Investigador;
+--VIEWS
+GRANT SELECT ON micelab.experiencias TO Investigador;
+GRANT SELECT ON micelab.alertas TO Investigador;
+--PROCEDURES
+GRANT EXECUTE ON PROCEDURE micelab.adicionarOdorExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.deleteSubstanciaExperiencia  TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.deleteOdoresExperiencia  TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.adicionarSubstanciaExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.consultarInformaçãoPessoal TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.finalizarExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.iniciarExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.mudarExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.mudarProprioUser TO Investigador;
+
+
+CREATE ROLE Java;
+--TABLES
+GRANT INSERT ON micelab.medicaotemperatura TO Java;
+GRANT INSERT ON micelab.log TO Java;
+--VIEWS
+GRANT SELECT ON micelab.javaop TO Java;
+--PROCEDURES
+GRANT EXECUTE ON PROCEDURE micelab.experienciaPopulada TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.introduzirAlerta TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.introduzirPassagem TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.introduzirErroExperiencia TO Java;
+
+
+CREATE ROLE Tecnico;
+--TABLES
+GRANT SELECT ON micelab.alerta TO Tecnico;
+GRANT SELECT ON micelab.configuracaolabirinto TO Tecnico;
+GRANT SELECT ON micelab.medicaopassagem TO Tecnico;
+GRANT SELECT ON micelab.medicaosala TO Tecnico;
+GRANT SELECT ON micelab.medicaotemperatura TO Tecnico;
+GRANT SELECT ON micelab.parametrosadicionais TO Tecnico;
+GRANT SELECT ON micelab.erroexperiencia TO Tecnico;
+--PROCEUDRES
+GRANT EXECUTE ON PROCEDURE micelab.mudarProprioUser TO Tecnico;
+--VIEWS
+GRANT SELECT ON micelab.alertas TO Tecnico;
+
+
+------------------------COPY&PASTE-------------------------------------
+
+DROP ROLE IF EXISTS AppAdmin;
+DROP ROLE IF EXISTS Investigador;
+DROP ROLE IF EXISTS Java;
+DROP ROLE IF EXISTS Tecnico;
+CREATE ROLE AppAdmin;
+GRANT SELECT ON micelab.alerta TO AppAdmin;
+GRANT ALL ON micelab.configuracaolabirinto TO AppAdmin;
+GRANT ALL ON micelab.corredor TO AppAdmin;
+GRANT SELECT, INSERT ON micelab.experiencia TO AppAdmin;
+GRANT SELECT ON micelab.log TO AppAdmin;
+GRANT SELECT ON micelab.medicaopassagem TO AppAdmin;
+GRANT SELECT ON micelab.medicaosala TO AppAdmin;
+GRANT SELECT ON micelab.medicaotemperatura TO AppAdmin;
+GRANT ALL ON micelab.odor TO AppAdmin;
+GRANT SELECT ON micelab.odorexperiencia TO AppAdmin;
+GRANT SELECT ON micelab.parametrosadicionais TO AppAdmin;
+GRANT ALL ON micelab.substancia TO AppAdmin;
+GRANT SELECT ON micelab.substanciaexperiencia TO AppAdmin;
+GRANT ALL ON micelab.tipoalerta TO AppAdmin;
+GRANT ALL ON micelab.tipoutilizador TO AppAdmin;
+GRANT SELECT ON micelab.utilizador TO AppAdmin;
+GRANT SELECT ON micelab.erroexperiencia TO AppAdmin;
+GRANT SELECT ON micelab.javaop TO AppAdmin;
+GRANT SELECT ON micelab.alertas TO AppAdmin;
+GRANT SELECT ON micelab.parametrosjavaop TO AppAdmin;
+GRANT SELECT ON micelab.javaop TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.consultarInformaçãoPessoal TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteLogicoExperiencia TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteSubstanciaExperiencia  TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteOdoresExperiencia  TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.deleteUtilizador  TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.resetDadosExperiencia TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.mudarOutraExperiencia TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.mudarOutroUser TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.mudarProprioUser TO AppAdmin;
+GRANT EXECUTE ON PROCEDURE micelab.criarUtilizador TO AppAdmin;
+GRANT EXECUTE ON FUNCTION micelab.checkUsernameExiste TO AppAdmin;
+CREATE ROLE Investigador;
+GRANT SELECT ON micelab.configuracaolabirinto TO Investigador;
+GRANT SELECT ON micelab.corredor TO Investigador;
+GRANT SELECT ON micelab.experiencia TO Investigador;
+GRANT SELECT ON micelab.medicaopassagem TO Investigador;
+GRANT SELECT ON micelab.medicaosala TO Investigador;
+GRANT SELECT ON micelab.log TO Investigador;
+GRANT SELECT ON micelab.medicaotemperatura TO Investigador;
+GRANT SELECT ON micelab.odor TO Investigador;
+GRANT SELECT ON micelab.odorexperiencia TO Investigador;
+GRANT SELECT ON micelab.substancia TO Investigador;
+GRANT SELECT ON micelab.substanciaexperiencia TO Investigador;
+GRANT SELECT ON micelab.tipoalerta TO Investigador;
+GRANT SELECT ON micelab.erroexperiencia TO Investigador;
+GRANT SELECT ON micelab.experiencias TO Investigador;
+GRANT SELECT ON micelab.alertas TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.adicionarOdorExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.deleteSubstanciaExperiencia  TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.deleteOdoresExperiencia  TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.adicionarSubstanciaExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.consultarInformaçãoPessoal TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.finalizarExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.iniciarExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.mudarExperiencia TO Investigador;
+GRANT EXECUTE ON PROCEDURE micelab.mudarProprioUser TO Investigador;
+CREATE ROLE Java;
+GRANT INSERT ON micelab.medicaotemperatura TO Java;
+GRANT INSERT ON micelab.log TO Java;
+GRANT SELECT ON micelab.javaop TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.experienciaPopulada TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.introduzirAlerta TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.introduzirPassagem TO Java;
+GRANT EXECUTE ON PROCEDURE micelab.introduzirErroExperiencia TO Java;
+CREATE ROLE Tecnico;
+GRANT SELECT ON micelab.alerta TO Tecnico;
+GRANT SELECT ON micelab.configuracaolabirinto TO Tecnico;
+GRANT SELECT ON micelab.medicaopassagem TO Tecnico;
+GRANT SELECT ON micelab.medicaosala TO Tecnico;
+GRANT SELECT ON micelab.medicaotemperatura TO Tecnico;
+GRANT SELECT ON micelab.parametrosadicionais TO Tecnico;
+GRANT SELECT ON micelab.erroexperiencia TO Tecnico;
+GRANT EXECUTE ON PROCEDURE micelab.mudarProprioUser TO Tecnico;
+GRANT SELECT ON micelab.alertas TO Tecnico;
+
+
+

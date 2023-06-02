@@ -1,0 +1,115 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %} Utilizadores {% endblock %}
+{% block nav-bar-title %} Utilizadores {% endblock %}
+
+{% block main-content %}
+
+<div class="row">
+
+    <div class="col-md-6 ">
+      <h3>Empregados</h3>
+      <table class="table table-hover" id="myTable" 
+      data-toggle="table" 
+      data-pagination="true" 
+      data-page-size="5" 
+      data-pagination-loop="false"
+      data-sortable="true"
+      data-search="true">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Username</th>
+                    <th>Endereço</th>
+                    <th>Nº Telefone</th>
+                    <th>Ativo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td><img class="card-img-top" style="max-width: 6vh;" src="{% static u.Imagem %}" alt="Não tem foto"></td>
+                    <td>{{ u.User.username }}</td>
+                    <td>{{ u.Endereco }}</td>
+                    <td>{{ u.Phone }}</td>
+                    <td>{{ u.Ativo }}</td>
+                    <td>
+                      {% if u.Ativo %} <a href="{% url 'store:inactivateuser' u.User.id %}" class="btn btn-danger"><i class="fa-solid fa-xmark"></i>&nbsp;Desativar empregado</a> 
+                      {% else %} <a href="{% url 'store:activateuser' u.User.id %}" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Ativar empregado</a>
+                      {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Adicionar empregado</h3>
+        <form action="{% url 'store:addemployee' %}" method="post" class="mt-5" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group mb-3">
+                <label for="username">Username</label>
+            
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-user" style="color: #545454;font-size: 24px;"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-lock" style="color: #545454;font-size: 24px;"></i></span>
+                  </div>
+                  <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                </div>
+              </div>
+            
+              <div class="form-group mb-3">
+                <label for="address">Endereço</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-house" style="color: #545454;font-size: 24px;"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="address" placeholder="Endereço" name="address">
+                </div>
+              </div>
+            
+              <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-envelope"
+                        style="color: #545454;font-size: 24px;"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="email" placeholder="Email" name="email">
+                </div>
+              </div>
+            
+              <div class="form-group mb-3">
+                <label for="contact">Nr. de contacto</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-phone" style="color: #545454;font-size: 24px;"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="contact" placeholder="Nr. de contacto" name="contact">
+                </div>
+              </div>
+            
+              <div class="form-group mb-3">
+                <label for="photo">Foto</label>
+                <input type="file" class="form-control" id="photo" placeholder="Foto" name="photo">
+              </div>
+            
+              <button type="submit" class="btn btn-primary mt-2 mb-2">Adicionar empregado</button>
+            </form>
+    </div>
+</div>
+
+{% endblock %}

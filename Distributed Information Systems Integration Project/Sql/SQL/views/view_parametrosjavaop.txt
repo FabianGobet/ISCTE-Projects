@@ -1,0 +1,13 @@
+CREATE VIEW parametrosjavaop AS
+SELECT
+	(SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='FATOR_ALERTA_TEMPERATURA' AND pa.Identificador=1) AS fator_alerta_vermelho,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='FATOR_ALERTA_TEMPERATURA' AND pa.Identificador=2) AS fator_alerta_laranja,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='FATOR_ALERTA_TEMPERATURA' AND pa.Identificador=3) AS fator_alerta_amarelho,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='NUM_MAX_SENSORES' AND pa.Identificador='NUM_SENSORES') AS num_sensores,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='PARAMETRO_PERIODICIDADE' AND pa.Identificador='FATOR') AS fator_periodicidade,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='PARAMETRO_PERIODICIDADE' AND pa.Identificador='TEMPO') AS tempo_max_periodicidade,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='TAMANHO_OUTLIER_SAMPLE' AND pa.Identificador='FATOR') AS fator_tamanho_outlier_sample,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='TEMPERATURA' AND pa.Identificador='MAXIMA') AS temperatura_maxima,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='TEMPERATURA' AND pa.Identificador='MINIMA') AS temperatura_minima,
+    (SELECT pa.Valor FROM parametrosadicionais pa WHERE pa.Agrupador='TEMPO_ENTRE_EXPERIENCIA' AND pa.Identificador='TEMPO') AS tempo_entre_experiencia,
+    (SELECT cf.SegundosAberturaPortasExterior FROM configuracaolabirinto cf LIMIT 1) AS segundos_abertura_portas_exterior;

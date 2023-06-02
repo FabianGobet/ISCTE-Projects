@@ -1,0 +1,50 @@
+{% extends "./base.html"%}
+
+{% block titulo %}
+Detalhe utilizador
+{% endblock %}
+
+
+
+
+{% block private-css %}
+
+<style>
+  .registar-meuperfil-image {
+    width: 157px;
+    height: 170px;
+    object-fit: cover;
+    margin-bottom: 24px;
+  }
+</style>
+
+
+{% load static %}
+<script src="{% static 'votacao/scripts/detalheutilizador.js'%}"></script>
+
+{% endblock %}
+
+{% block main-content %}
+
+{% load static %}
+<img id="profile-image" alt="image" src="{% static '' %}{{request.session.image_name}}"
+  class="registar-meuperfil-image" />
+
+<div id="profile-details" style="display: none;">
+  <p>Username: {{request.user}}</p>
+
+  <p>Email: {{request.user.email}}</p>
+</div>
+
+
+
+<form method="post" enctype="multipart/form-data" action="{% url 'votacao:fazer_upload' %}">
+  {% csrf_token %}
+  <input type="file" name="myfile">
+  <input type="submit" value="Upload">
+</form>
+
+
+
+
+{% endblock %}

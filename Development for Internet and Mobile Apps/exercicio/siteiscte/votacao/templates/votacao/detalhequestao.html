@@ -1,0 +1,59 @@
+{% extends "./base.html"%}
+
+{% block titulo %}
+  Detalhe pergunta
+{% endblock %} 
+
+{% block private-css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'votacao/css/detalhequestao.css'%}">
+{% endblock %}
+
+{% block main-content %}
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+            
+<span class="detalhepergunta-text">{{ questao.questao_texto }}</span>
+  
+    <form action="{% url 'votacao:voto' questao.id %}" method="post">
+      {% csrf_token %}
+      <div class="detalhepergunta-container2">
+    <ul class="detalhepergunta-ul list">
+      {% for opcao in questao.opcao_set.all %}
+        <li class="detalhepergunta-li list-item">
+          <span class="detalhepergunta-text1">({{opcao.votos}})</span>
+          <input
+            id="opcao{{ forloop.counter }}"
+            type="radio"
+            name="opcao"
+            class="detalhepergunta-radiobutton"
+            value="{{ opcao.id }}" 
+          />
+          <span class="detalhepergunta-text2">{{ opcao.opcao_texto }}</span>
+          {% if request.user.is_superuser %}
+            <a href="{% url 'votacao:removeropcao' questao.id opcao.id %}">
+            <span class="detalhepergunta-button5 button">X</span></a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="detalhepergunta-container3">
+      <button type="submit" class="detalhepergunta-button3 button">Votar</button>
+      {% if request.user.is_superuser %}
+      <a href="{% url 'votacao:criaropcao' questao.id %}">
+      <span class="detalhepergunta-button4 button">
+        Adicionar opção
+      </span>
+    </a>
+    
+    <a href="{% url 'votacao:removerquestao' questao.id %}">
+      <span class="detalhepergunta-button5 button">
+        Remover questão
+      </span></a>
+      {% endif %}
+    </div></div>
+  </form>
+  
+
+{% endblock %}

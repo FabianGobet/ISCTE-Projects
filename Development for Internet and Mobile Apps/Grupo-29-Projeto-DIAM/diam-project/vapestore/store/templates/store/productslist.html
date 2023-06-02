@@ -1,0 +1,30 @@
+{% extends "./base.html" %}
+
+
+{% load static %}
+{% block title %} Produtos {% endblock %}
+{% block custom-imports %} 
+<script src="{% static 'scripts/productslist.js' %}"></script>
+{% endblock %}
+
+
+{% block nav-bar-title %} Produtos {% endblock %}
+
+{% block main-content %}
+
+
+<div class="card-group  mt-5">
+    {%for elem in products %}
+    <div class="card mx-2" data-url="{% url 'store:productdetail' elem.id %}" style="max-width: 15%;">
+        <img class="card-img-top" src="{% static elem.Imagem %}" alt="Não tem foto">
+        <div class="card-body">
+          <h5 class="card-title">{{elem.Nome}}</h5>
+          <p class="card-text">{{elem.Descricao}}</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{elem.Preco_Unidade}} &nbsp;<i class="fa fa-eur text-dark" aria-hidden="true"></i> </small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

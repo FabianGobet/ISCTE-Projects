@@ -1,0 +1,36 @@
+['alerta', 'configuracaolabirinto', 'corredor', 'experiencia', 'log', 'medicaopassagem', 'medicaosala', 'medicaotemperatura', 'odor', 'odorexperiencia', 'parametrosadicionais', 'substancia', 'substanciaexperiencia', 'tipoalerta', 'tipoutilizador', 'utilizador']
+
+GRANT permission ON 'database'.'alerta' TO ROLE
+GRANT permission ON 'database'.'configuracaolabirinto' TO ROLE
+GRANT permission ON 'database'.'corredor' TO ROLE
+GRANT permission ON 'database'.'experiencia' TO ROLE
+GRANT permission ON 'database'.'log' TO ROLE
+GRANT permission ON 'database'.'medicaopassagem' TO ROLE
+GRANT permission ON 'database'.'medicaosala' TO ROLE
+GRANT permission ON 'database'.'medicaotemperatura' TO ROLE
+GRANT permission ON 'database'.'odor' TO ROLE
+GRANT permission ON 'database'.'odorexperiencia' TO ROLE
+GRANT permission ON 'database'.'parametrosadicionais' TO ROLE
+GRANT permission ON 'database'.'substancia' TO ROLE
+GRANT permission ON 'database'.'substanciaexperiencia' TO ROLE
+GRANT permission ON 'database'.'tipoalerta' TO ROLE
+GRANT permission ON 'database'.'tipoutilizador' TO ROLE
+GRANT permission ON 'database'.'utilizador' TO ROLE
+
+
+['adicionarOdorExperiencia', 'adicionarSubstanciaExperiencia', 'consultarInformaçãoPessoal', 'deleteLogicoExperiencia', 'resetDadosExperiencia', 'experienciaPopulada', 'finalizarExperiencia', 'iniciarExperiencia', 'introduzirAlerta', 'introduzirPassagem', 'mudarExperiencia', 'mudarOutraExperiencia', 'mudarOutroUser', 'mudarProprioUser']
+
+GRANT EXECUTE ON 'database'.'adicionarOdorExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'adicionarSubstanciaExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'consultarInformaçãoPessoal' TO ROLE
+GRANT EXECUTE ON 'database'.'deleteLogicoExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'resetDadosExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'experienciaPopulada' TO ROLE
+GRANT EXECUTE ON 'database'.'finalizarExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'iniciarExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'introduzirAlerta' TO ROLE
+GRANT EXECUTE ON 'database'.'introduzirPassagem' TO ROLE
+GRANT EXECUTE ON 'database'.'mudarExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'mudarOutraExperiencia' TO ROLE
+GRANT EXECUTE ON 'database'.'mudarOutroUser' TO ROLE
+GRANT EXECUTE ON 'database'.'mudarProprioUser' TO ROLE

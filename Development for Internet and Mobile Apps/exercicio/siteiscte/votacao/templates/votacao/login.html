@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>login - RAW-DIAM</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css"  href="{% static 'votacao/css/login.css'%}" />
+    
+  </head>
+  <body>
+    <div>
+      <header class="login-container">
+        <header data-thq="thq-navbar" class="login-head">
+          <div class="login-left">
+            <img
+              alt="image"
+              src="{% static 'votacao/images/isc-200h.png' %}"
+              class="login-banneriscte"
+            />
+            <span class="login-diam">DIAM 22/23 - grupo 29</span>
+          </div>
+        </header>
+        <div class="login-content">
+          <form class="login-form" action="{% url 'votacao:login' %}" method="POST">
+            {% csrf_token %}
+            <div class="login-form-entry-combo">
+              <label for="username-input" class="login-username-label">
+                Username
+              </label>
+              <input
+                name="username"
+                type="text"
+                id="username-input"
+                required=""
+                placeholder="Escreva username aqui"
+                class="login-username-input input"
+              />
+            </div>
+            <div class="login-form-entry-combo1">
+              <label for="password-input" class="login-password-label">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                id="password-input"
+                required=""
+                placeholder="Escreva password aqui"
+                class="login-password-input input"
+              />
+            </div>
+            <button type="submit" class="button login-entrar">Entrar</button>
+            <a href="{%url 'votacao:registar'%}"> 
+            <span class="login-conta">
+              <span>Ainda não tem conta? Clique aqui</span>
+              <span>.</span>
+            </span>
+            </a>
+          </form>
+        </div>
+      </header>
+    </div>
+  </body>
+</html>

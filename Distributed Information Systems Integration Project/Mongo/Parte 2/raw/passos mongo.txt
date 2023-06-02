@@ -1,0 +1,426 @@
+Iremos ter 4 maquinas Ubuntu 20.04:
+Maquina 0: A correr uma instancia do de config server (cfg0), uma instancia(0) do shard A (replSet: repShardA), uma instancia(0) do shard B (replSet: repShardB) e uma instancia(0) do shard C (replSet: repShardC)
+Maquina 1: A correr uma instancia do de config server (cfg1), uma instancia(1) do shard A (replSet: repShardA), uma instancia(1) do shard B (replSet: repShardB) e uma instancia(1) do shard C (replSet: repShardC)
+Maquina 2: A correr uma instancia do de config server (cfg2), uma instancia(2) do shard A (replSet: repShardA), uma instancia(2) do shard B (replSet: repShardB) e uma instancia(2) do shard C (replSet: repShardC)
+Maquina 3: A correr uma instancia(0) do mongos (um 'router do nosso cluster)
+Maquina 4: A correr uma instancia(1) do mongos (um 'router do nosso cluster)
+
+
+Em cada uma das m√°quinas:
+> apt-get install gnupg
+> curl -fsSL https://pgp.mongodb.com/server-6.0.asc | gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
+> echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+> apt-get update
+> apt-get install -y mongodb-org
+
+Maquina 0:
+> mkdir mongo && cd mongo
+> mkdir -p cfg0/data cfg0/log a0/data b0/data c0/data a0/log b0/log c0/log
+> touch cfg0/log/logs.log a0/log/logs.log b0/log/logs.log c0/log/logs.log
+> openssl rand -base64 756 > keyfile
+> chmod 600 keyfile
+
+Para este fim usamos apenas um keyfile para a autenticacao em replicaset e em clusters, mas em contexto de produ√ß√£o devem considerados um para cada replica e para o cluster.
+
+Maquina 1:
+> mkdir mongo && cd mongo
+> mkdir -p cfg1/data cfg1/log a1/data b1/data c1/data a1/log b1/log c1/log
+> touch cfg1/log/logs.log a1/log/logs.log b1/log/logs.log c1/log/logs.log
+Copiar o keyfile da maquina 0 para /mongo desta maquina
+> chmod 600 keyfile
+
+Maquina 2:
+> mkdir mongo && cd mongo
+> mkdir -p cfg2/data cfg2/log a2/data b2/data c2/data a2/log b2/log c2/log
+> touch cfg2/log/logs.log a2/log/logs.log b2/log/logs.log c2/log/logs.log
+Copiar o keyfile da maquina 0 para /mongo desta maquina
+> chmod 600 keyfile
+
+Copiar o seguinte ficheiro de configura√ß√£o para a pasta /mongo de cada uma das 3 maquinas, e criar 4 c√≥pias para cada um dos servidores com as respetivas configura√ß√µes.
+Guardar o ficheiro com nome sugestivo, i.e. cfg0.conf, a3.conf,...
+
+------------------------- CONF GEN√âRICO -----------------------------
+
+storage:
+  dbPath: /mongo/{TIPO/LETRA DO CLUSTER}{NUMERO DA MAQUINA}/data
+
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: /mongo/{NOME TIPO DA REPLICA}{NUMERO DA MAQUINA}/log/logs.log
+
+net:
+  port: 370{INDICE PARA TIPO REPLICA i.e. cfg=0, a=1,...}{INDICE PARA ELEMENTO REPLICA i.e. 0,1,2...}
+  bindIp: 0.0.0.0
+
+
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+security:
+  authorization: enabled
+  keyFile: /mongo/keyfile
+
+
+replication:
+  replSetName: {NOME TIPO DE REPLICA i.e. cfg,a,...}
+
+setParameter:
+   enableLocalhostAuthBypass: true
+
+processManagement:
+  fork: true
+ 
+sharding:
+  clusterRole: {configsvr/shardsvr}
+	
+  #APENAS PARA MONGOS (ROUTERS)
+  #configDB: <configReplSetName>/ip0:port0,ip1:port1...
+
+
+------------------------- FIM -----------------------------
+
+Ter em conta a seguinte configura√ß√£o de ips:portas:
+
+Shard			CFG			A			B			C
+Maquina0	ip0:37000	ip0:37010	ip0:37020	ip0:37030
+Maquina1	ip1:37001	ip1:37011	ip1:37021	ip1:37031
+Maquina2	ip2:37002	ip1:37012	ip2:37022	ip2:37032
+
+mongos(router)			s
+Maquina3			ip3:37041
+Maquina4			ip4:37040
+
+Para este setup, em dockers com routing externo, o endereÁo de ip base È igual, isto È:
+ip0=ip1=ip2=46.189.143.63
+
+docker run -itd --name machine0 -p 37000:37000 -p 37010:37010 -p 37020:37020 -p 37030:37030 fabiangobet/mongocluster-machine0:1
+docker run -itd --name machine1 -p 37001:37001 -p 37011:37011 -p 37021:37021 -p 37031:37031 fabiangobet/mongocluster-machine1:1
+docker run -itd --name machine2 -p 37002:37002 -p 37012:37012 -p 37022:37022 -p 37032:37032 fabiangobet/mongocluster-machine2:1
+
+Nas maquinas 0, 1 e 2 na pasta mongo executar mongod -f cfgN.conf onde N È o numero da maquina
+
+Na maquina0 vamos iniciar o replicaset associado aos servidores de config.
+Para tal acedemos ao servidor atravÈs de mongosh --port 37000
+> Use admin 
+> db.createUser({user:"root", pwd:"root", roles:[{role:"root", db:"admin"}]})
+Este utilizador com estas permissıes vai ser importante para executar alguns comandos no futuro
+> db.auth("root","root") para autenticar
+
+Vamos agora adicionar os outros dois servidores de config com priority 0.9 para forÁar esta instancia a primary.
+
+> rs.add({host:"46.189.143.63:37001",priority:0.9})
+> rs.add({host:"46.189.143.63:37002",priority:0.9})
+
+Executando o comando rs.conf() podemos verificar todos os elementos do da nossa replica.
+… possivel que estes ainda nao estejam ligados porque o host do nosso servidor n„o consegue ser resolvido. Para tal, trocamos o host do servidor local para o seu ip publico.
+
+> cfg = rs.conf()
+> cfg.members[0].host="46.189.143.63:37000"
+> rs.reconfig(cfg)
+
+rs.initiate(
+  {
+    _id: "cfg",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "46.189.143.63:37000" },
+      { _id : 1, host : "46.189.143.63:37001", priority: 0.9 },
+      { _id : 2, host : "46.189.143.63:37002", priority: 0.9 }
+    ]
+  }
+)
+
+
+Se desta vez fizermos rs.status() podemos verificar que no state dos restantes elementos j· temos a palavra 'SECONDARY' a aparecer, o que se traduz no sucesso do estabelecimento da replica para cada elemento.
+
+Agora devemos repetir o processo todo mas atendendo ‡s configuraÁıes do shard A em cada maquina.
+Depois na maquina0 repetir com atributos relativos ao A:
+
+> mongosh --port 37010
+> Use admin 
+> rs.initiate()
+> db.createUser({user:"root", pwd:"root", roles:[{role:"root", db:"admin"}]})
+> db.auth("admin","admin")
+> rs.add({host:"46.189.143.63:37011",priority:0.9})
+> rs.add({host:"46.189.143.63:37012",priority:0.9}) 
+> cfg = rs.conf()
+> cfg.members[0].host="46.189.143.63:37010"
+> rs.reconfig(cfg)
+> exit
+
+rs.initiate(
+  {
+    _id: "a",
+    members: [
+      { _id : 0, host : "46.189.143.63:37010" },
+      { _id : 1, host : "46.189.143.63:37011", priority: 0.9 },
+      { _id : 2, host : "46.189.143.63:37012", priority: 0.9 }
+    ]
+  }
+)
+
+rs.initiate(
+  {
+    _id: "b",
+    members: [
+      { _id : 0, host : "46.189.143.63:37020" },
+      { _id : 1, host : "46.189.143.63:37021", priority: 0.9 },
+      { _id : 2, host : "46.189.143.63:37022", priority: 0.9 }
+    ]
+  }
+)
+
+rs.initiate(
+  {
+    _id: "c",
+    members: [
+      { _id : 0, host : "46.189.143.63:37030" },
+      { _id : 1, host : "46.189.143.63:37031", priority: 0.9 },
+      { _id : 2, host : "46.189.143.63:37032", priority: 0.9 }
+    ]
+  }
+)
+
+-------------------------------------------AWS-----------------------------------
+
+Shard			CFG			A			B			C
+Maquina0	ip0:37100	ip0:37110	ip0:37120	ip0:37130
+Maquina1	ip1:37101	ip1:37111	ip1:37121	ip1:37131
+Maquina2	ip2:37102	ip1:37112	ip2:37122	ip2:37132
+
+mongos(router)			s
+Maquina3			ip3:37141
+Maquina4			ip4:37140
+
+ip0 = 3.8.243.72
+ip2 = 85.247.12.172
+ip1 = ip3 = ip4 = 46.189.143.63
+
+
+docker run -itd --name machine1-aws -p 37101:37101 -p 37111:37111 -p 37121:37121 -p 37131:37131 fabiangobet/mongocluster-machine1:1
+docker run -itd --name machine2-aws -p 37102:37102 -p 37112:37112 -p 37122:37122 -p 37132:37132 fabiangobet/mongocluster-machine2:1
+docker run -itd --name machine3-aws -p 37141:37141 fabiangobet/mongocluster-router0:1
+docker run -itd --name machine4-aws -p 37140:37140 fabiangobet/mongocluster-router0:1
+
+rs.initiate(
+  {
+    _id: "cfg",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "3.8.243.72:37100" },
+      { _id : 1, host : "46.189.143.63:37101", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37102", priority: 0.9 }
+    ]
+  }
+)
+
+
+rs.initiate(
+  {
+    _id: "a",
+    members: [
+      { _id : 0, host : "3.8.243.72:37110" },
+      { _id : 1, host : "46.189.143.63:37111", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37112", priority: 0.9 }
+    ]
+  }
+)
+
+
+rs.initiate(
+  {
+    _id: "b",
+    members: [
+      { _id : 0, host : "3.8.243.72:37120" },
+      { _id : 1, host : "46.189.143.63:37121", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37122", priority: 0.9 }
+    ]
+  }
+)
+
+
+rs.initiate(
+  {
+    _id: "c",
+    members: [
+      { _id : 0, host : "3.8.243.72:37130" },
+      { _id : 1, host : "46.189.143.63:37131", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37132", priority: 0.9 }
+    ]
+  }
+)
+
+
+sharding:
+  configDB: cfg/3.8.243.72:37100,46.189.143.63:37001,85.247.12.172:37102
+
+sudo -i 
+  
+mongos --port 37140
+
+Use admin 
+db.createUser({user:"root", pwd:"root", roles:[{role:"root", db:"admin"}]})
+db.auth('root','root')
+db.createUser({user:"admin",pwd:"admin",roles:[{role:"clusterAdmin",db:"admin"},{role:"readAnyDatabase",db:"admin"},"readWrite"]})
+
+> sh.addShard("a/3.8.243.72:37110,46.189.143.63:37111,85.247.12.172:37112")
+> sh.addShard("b/3.8.243.72:37120,46.189.143.63:37121,85.247.12.172:37122")
+> sh.addShard("c/3.8.243.72:37130,46.189.143.63:37131,85.247.12.172:37132")
+
+use mqttData
+db.createCollection("mazemov14")
+db.createCollection("mazetemp14")
+db.createCollection("mazelog14")
+db.createCollection("mazemanage14")
+db.createUser({user:"javaop",pwd:"javaop",roles:["readWrite"]})
+sh.enableSharding("mqttData")
+sh.shardCollection("mqttData.mazemanage14",{"numExp":"hashed"})
+sh.shardCollection("mqttData.mazelog14",{"Hora":"hashed"})
+sh.shardCollection("mqttData.mazemov14",{"numExp":"hashed"})
+sh.shardCollection("mqttData.mazetemp14",{"numExp":"hashed"})
+
+
+use teste
+db.createUser({user:"javaop",pwd:"javaop",roles:["readWrite"]})
+
+db.createCollection("hashed")
+sh.shardCollection("teste.hashed",{"numExp":"hashed"})
+
+db.createCollection("ranged")
+sh.addShardToZone("a","1")
+sh.updateZoneKeyRange("teste.ranged",{numExp:1}, {numExp:4}, "1")
+sh.addShardToZone("b","2")
+sh.updateZoneKeyRange("teste.ranged",{numExp:4}, {numExp:7}, "2")
+sh.addShardToZone("c","3")
+sh.updateZoneKeyRange("teste.ranged",{numExp:7}, {numExp:10}, "3")
+sh.shardCollection("teste.ranged",{numExp:1})
+sh.status()
+
+sh.updateZoneKeyRange("teste.ranged",{numExp:7}, {numExp:10}, null) --> apagar
+sh.hashed.getShardDistribution()
+sh.ranged.getShardDistribution()
+
+> correr programa
+> parar maquina 3 e notar sequencia N1 
+> parar maquina 2 e notar sequencia N2
+
+db.hashed.find({$and:[{numExp: {$gt: {N1|N2}-10}},{numExp:  {$lt: {N1|N2}-10}}]}).sort({"numExp":1})
+db.ranged.find({$and:[{sequence: {$gt: N1|N2}-10}},{sequence:  {$lt: {N1|N2}-10}}]}).sort({"sequence":1})
+
+-------------------------------------------------------------------------------------------------------
+
+Neste momento temos o shard A e o replica set do mesmo configurados.
+Devemos proceder da mesma forma para o shard B e shard C.
+
+Depois de compor todos os shards e respetivas replicas, executando 'ps aux' em cada uma das maquinas devemos ter algo do gÈnero 
+
+Resta agora apenas configurar e lanÁar os pontos de entrada(mongos)
+
+docker run -itd --name machine4 -p 37040:37040 fabiangobet/mongocluster-router0:1
+docker run -itd --name machine3 -p 37041:37041 fabiangobet/mongocluster-router0:1
+
+Consideremos uma maquina 4 tal que: Maquina4 ip3:37040, onde ip3=46.189.143.63
+
+Maquina 0:
+> mkdir mongo && cd mongo
+> mkdir -p s0/data s0/log
+> touch s0/log/logs.log
+> Copiar a chave keyfile para /mongo
+> chmod 600 keyfile
+
+Com ficheiro de configuraÁ„o mongo:
+
+------------------------- CONF GEN√âRICO -----------------------------
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: /mongo/s0/log/logs.log
+
+net:
+  port: 37040
+  bindIp: 0.0.0.0
+
+
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+security:
+  keyFile: /mongo/keyfile
+
+
+setParameter:
+  enableLocalhostAuthBypass: true
+
+processManagement:
+  fork: true
+ 
+sharding:
+  configDB: cfg/46.189.143.63:37000,46.189.143.63:37001,46.189.143.63:37002
+
+
+------------------------- FIM -----------------------------
+
+LanÁamos a instancia do mongos e acedemos ‡ mesma
+> mongos -f s0.conf
+> mongosh --port 37040
+
+Precisamos agora de nos autenticar com o user do replica set cfg
+
+> use admin
+> db.auth("admin","admin")
+
+E agora vamos adicionar os nossos shards. Para cada shard devemos adicionar o nome da replica e o IP do primario da seguinte forma:
+
+> sh.addShard("a/46.189.143.63:37010,46.189.143.63:37011,46.189.143.63:37012")
+> sh.addShard("b/46.189.143.63:37020,46.189.143.63:37021,46.189.143.63:37021")
+> sh.addShard("c/46.189.143.63:37030,46.189.143.63:37031,46.189.143.63:37032")
+
+Podemos depois utilizar 'sh.status()' para ver o estado e propriedades do cluster hard
+Neste momento nao temos bases de dados criadas. Vamos criar uma com as coleÁıes do projeto.
+Caso a base de dados n„o esteja em sh.status() databases, podemos executar 'sh.enableSharding("mqttData")'
+
+Agora sÛ resta adicionar as coleÁıes ao nosso cluster shard e especificar a shard key para cada uma destas.
+
+> sh.shardCollection("mqttData.mazelog14",{_id:1})
+> sh.shardCollection("mqttData.mazetemp14",{_id:1})
+> sh.shardCollection("mqttData.mazemanage14",{_id:1})
+> sh.shardCollection("mqttData.mazemov14",{_id:1})
+
+E finalmente devemos criar um utilizador para o java e um cluster admin
+
+> use mqttData
+> db.createUser({user:"javaop",pwd:"javaop",roles:["readWrite"]})
+> db.createUser({user:"admin",pwd:"admin",roles:[{role:"clusterAdmin",db:"admin"},{role:"readAnyDatabase",db:"admin"},"readWrite"]})
+
+Os limites definitivos de um chunck e a sua localiza√ß√£o em cada shard depende dos campos escolhidos para a indexa√ß√£o destes (shard key).
+Existem diversos fatores a ter em considera√ß√£o na escolha de um shard key de uma cole√ß√£o, nomeadamente:
+- Distribui√ß√£o uniforme dos dados pelos shards
+- Agrupamento de dados √† luz de aspetos passiveis de pesquisa
+- O tipo de queries que s√£o feitos √† base de dados
+
+A escolha n√£o planeada de um shard key pode levar a problemas como: 
+- Aglomera√ß√£o excessiva de dados (Jumbo Chunck)
+- Granularidade excessiva e posterior peso computacional em queries
+
+Alguns aspetos a ter em considera√ß√£o na escolha das shard keys e na meneira como afetam o sistema, atendendo aos t√≥picos anteriores, s√£o:
+- Grau de aleatoriedade 
+- Monotonicidade
+- Cardinalidade
+
+Tendo em conta o projeto desenvolvido e as caracteristicas de cada uma das cole√ß√µes, aa escolhas mais aproprieda a shard keys foram:
+mazemanage14 numExp:hashed, monotono e queries ao numExp
+mazelog14 Hora:hashed, monotono crescente com queries √† Hora
+mazetemp14 {numExp:hashed, Hora:hashed}, numExp e Hora crescente, queries na composi√ß√£o dos dois atributos
+mazemov14 {numExp:hashed, Hora:hashed}, numExp e Hora crescente, queries na composi√ß√£o dos dois atributos
+
+sh.shardCollection("mqttData.mazemanage14",{"numExp":"hashed"})
+sh.shardCollection("mqttData.mazelog14",{"Hora":"hashed"})
+sh.shardCollection("mqttData.mazemov14",{"numExp":"hashed"})
+sh.shardCollection("mqttData.mazetemp14",{"numExp":"hashed"})
+
+Caso hajam dados nas cole√ß√µes√© necess√°rio indexar os atributos que compoe a shard key, por exemplo:
+> db.mazemanage14.createInex({"numExp":"hashed"})
+> sh.shardCollection("mqttData.mazemanage14",{"numExp":"hashed"})

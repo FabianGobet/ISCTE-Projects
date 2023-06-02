@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'votacao/css/base.css'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{% static 'votacao/scripts/base.js'%}"></script>
+    <title> {% block titulo %} {% endblock %} </title>
+    {% block private-css %} {% endblock %}
+</head>
+
+<body>
+
+    <div class="frame">
+        <div class="upper-bar-container upper-bar-root-class-name3">
+          <header data-thq="thq-navbar" class="upper-bar-head">
+            <div class="upper-bar-left">
+                
+              <img
+                alt="image"
+                src="{% static 'votacao/images/isc-200h.png' %}"
+                class="upper-bar-banneriscte"
+              />
+              <span class="upper-bar-diam">
+                <span>DIAM 22/23 - grupo 29</span>
+              </span>
+            </div>
+            <div class="upper-bar-right">
+              <img
+              id="profile-image-top-bar"
+                alt="image"
+                src="{% static '' %}{{request.session.image_name}}"
+                class="upper-bar-image"
+              />
+              <span id="profile-username-top-bar" class="upper-bar-utilizador">{{request.user}}</span>
+            </div>
+          </header>
+        </div>
+        <div class="main-container">
+          <div class="sidebar-sidebar sidebar-root-class-name3">
+            <nav class="sidebar-nav">
+              <a href="{% url 'votacao:index' %}"><span class="sidebar-home"  >Home</span></a>
+              <a href="{% url 'votacao:detalheutilizador'%}" ><span class="sidebar-perfil">O meu perfil</span></a>
+              <a href="{% url 'votacao:logout'%}"><span class="sidebar-logout">Logout</span></a>
+            </nav>
+          </div>
+          <div class="content">
+            {% block main-content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+</body>
+</html>

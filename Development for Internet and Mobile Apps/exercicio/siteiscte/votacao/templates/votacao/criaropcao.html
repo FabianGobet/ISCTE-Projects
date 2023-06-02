@@ -1,0 +1,36 @@
+{% extends "./base.html"%}
+
+{% block titulo %}
+  Criar opção
+{% endblock %} 
+
+{% block private-css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'votacao/css/adicionaropcao-questao.css'%}">
+{% endblock %}
+
+{% block main-content %}
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+<form class="adicionaropcao-questao-form" action="{% url 'votacao:gravaropcao' questao.id %}" method="post">
+  {% csrf_token %}Endereço de
+  <label for="opcao" class="adicionaropcao-questao-label">
+    Adicionar opção:
+  </label>
+  <input
+    type="text"
+    id="opcao"
+    name="input-option"
+    placeholder="Descreva a opção"
+    class="adicionaropcao-questao-input input"
+  />
+  <button
+    type="submit"
+    class="adicionaropcao-questao-button button"
+  >
+    Adicionar
+  </button>
+</form>
+            
+{% endblock %}

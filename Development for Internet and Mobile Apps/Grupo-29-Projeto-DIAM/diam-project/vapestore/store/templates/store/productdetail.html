@@ -1,0 +1,46 @@
+{% extends "./base.html" %}
+
+{% load static %}
+{% block custom-imports %} 
+<script src="{% static 'scripts/productdetail.js' %}"></script>
+{% endblock %}
+
+
+{% block title %} Detalhe {% endblock %}
+{% block nav-bar-title %} Detalhe de produto {% endblock %}
+{% block main-content %}
+
+
+<div class="mt-5">
+    <div class="row">
+        <h2>{{product.Nome}}</h2>
+        {% if product.Stock == 0 %}
+        <p class="text-danger"><i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i>&nbsp;Sem stock de momento&nbsp;<i class="fa fa-exclamation-triangle text-danger" aria-hidden="true"></i></p>
+        {% endif %}
+    </div>
+    
+    <div class="row col-md-12 mt-5">
+        <div class="col-md-6 ">
+            <img class="card-img-top" style="width: 350px;" src="{% static product.Imagem %}" alt="Não tem foto">
+        </div>
+        <div class="col-md-6">
+            <p>{{product.Descricao}}</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="price">Preço&nbsp;Un.</label>
+                    <p name="price" id="price" data-price="{{product.Preco_Unidade}}">{{product.Preco_Unidade}}&nbsp;€</p>
+                </div>
+                <div class="col-md-3">
+                    <label for="quantity">Quantidade</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" min="0" max="{{product.Stock}}">
+                </div>
+                <div class="col-md-3">
+                    <label for="total">Total</label>
+                    <p name="total" id="total">0&nbsp;€</p>
+                </div>
+            </div>
+            <button class="btn btn-primary col-md-4 mt-5" id="add-cart" data-product="{{product.id}}">Adicionar&nbsp;ao&nbsp;carrinho</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

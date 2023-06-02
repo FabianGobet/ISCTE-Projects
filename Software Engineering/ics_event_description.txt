@@ -1,0 +1,29 @@
+icd.data
+
+type	:	VEVENT
+	dtstamp		{1}
+dt	:	20230424T200358Z
+	dtstart		{1}
+dt	:	20220913T133000Z
+	dtend		{1}
+dt	:	20220913T150000Z
+summary	:	Programação Concorrente e Distribuída - Concurrent and Parallel Programming
+uid	:	847676220398161@fenix.iscte.pt
+description	:	Semestre: 2022/2023 - 1.º Semestre\\nUnidade de execução: Programação Concorrente e Distribuída\\nCódigo: L5096\\nTurno: L5096TP04\\nInício: 2022-09-13 14:30\\nFim: 2022-09-13 16:00\\nDocente: Luís Henrique Ramilo Mota\\n\\nSemester: 2022/2023 - 1.º Semestre\\nExecution course: Concurrent and Parallel Programming\\nCode: L5096\\nShift: L5096TP04\\nBegin: 2022-09-13 14:30\\nEnd: 2022-09-13 16:00\\nTeacher: Luís Henrique Ramilo Mota\\n\\n
+location	:	0S01, 0, Edifício Sedas Nunes (ISCTE-IUL), ISCTE-IUL
+
+description:
+Semestre: 2022/2023 - 1.º Semestre
+Unidade de execução: Programação Concorrente e Distribuída
+Código: L5096
+Turno: L5096TP04
+Início: 2022-09-13 14:30
+Fim: 2022-09-13 16:00
+Docente: Luís Henrique Ramilo Mota
+Semester: 2022/2023 - 1.º Semestre
+Execution course: Concurrent and Parallel Programming
+Code: L5096
+Shift: L5096TP04
+Begin: 2022-09-13 14:30
+End: 2022-09-13 16:00
+Teacher: Luís Henrique Ramilo Mota

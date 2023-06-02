@@ -1,0 +1,165 @@
+Shard			CFG			A			B			C	     	mongos 
+Maquina0	ip0:37100	ip0:37110	ip0:37120	ip0:37130	   ip0:37140
+Maquina1	ip1:37101	ip1:37111	ip1:37121	ip1:37131	   ip1:37141
+Maquina2	ip2:37102	ip2:37112	ip2:37122	ip2:37132		   -
+Maquina3    ip3:37103	ip3:37113	ip3:37123	ip3:37133		   -
+
+
+ip0 = ip3 = 46.189.143.63 
+ip1 = 3.8.243.72 
+ip2 = 85.247.12.172 
+
+
+docker run -itd --name machine0 -p 37100:37100 -p 37110:37110 -p 37120:37120 -p 37130:37130  -p 37140:37140 fabiangobet/mongocluster-machine0:1
+maquina 1 amazon
+docker run -itd --name machine2 -p 37102:37102 -p 37112:37112 -p 37122:37122 -p 37132:37132 fabiangobet/mongocluster-machine2:1
+docker run -itd --name machine3 -p 37103:37103 -p 37113:37113 -p 37123:37123 -p 37133:37133 fabiangobet/mongocluster-machine2:1
+
+sharding:
+  configDB: cfg/46.189.143.63:37100,3.8.243.72:37101,85.247.12.172:37102,46.189.143.63:37103
+
+mongosh --host 46.189.143.63 --port 37100
+rs.initiate(
+  {
+    _id: "cfg",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "46.189.143.63:37100" },
+      { _id : 1, host : "3.8.243.72:37101", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37102", priority: 0.7 },
+	  { _id : 3, host : "46.189.143.63:37103", priority: 0.8 },
+    ]
+  }
+)
+
+
+mongosh --host 46.189.143.63 --port 37110
+rs.initiate(
+  {
+    _id: "a",
+    members: [
+      { _id : 0, host : "46.189.143.63:37110" },
+      { _id : 1, host : "3.8.243.72:37111", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37112", priority: 0.7 },
+	  { _id : 3, host : "46.189.143.63:37113", priority: 0.8 },
+    ]
+  }
+)
+
+mongosh --host 46.189.143.63 --port 37120
+rs.initiate(
+  {
+    _id: "b",
+    members: [
+      { _id : 0, host : "46.189.143.63:37120" },
+      { _id : 1, host : "3.8.243.72:37121", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37122", priority: 0.7 }, 
+	  { _id : 3, host : "46.189.143.63:37123", priority: 0.8 },
+    ]
+  }
+)
+
+mongosh --host 46.189.143.63 --port 37130
+rs.initiate(
+  {
+    _id: "c",
+    members: [
+      { _id : 0, host : "46.189.143.63:37130" },
+      { _id : 1, host : "3.8.243.72:37131", priority: 0.9 },
+      { _id : 2, host : "85.247.12.172:37132", priority: 0.7 },
+	  { _id : 3, host : "46.189.143.63:37133", priority: 0.8 },
+	  
+    ]
+  }
+)
+
+
+mongos -f router0.conf
+
+sudo -i 
+mongos -f router1.conf
+
+mongosh --port 37140 --host 46.189.143.63
+
+use admin 
+db.createUser({user:"root", pwd:"root", roles:[{role:"root", db:"admin"}]})
+db.auth('root','root')
+db.createUser({user:"admin",pwd:"admin",roles:[{role:"clusterAdmin",db:"admin"},{role:"readAnyDatabase",db:"admin"},"readWrite"]})
+
+> sh.addShard("a/46.189.143.63:37110,3.8.243.72:37111,85.247.12.172:37112,46.189.143.63:37113")
+> sh.addShard("b/46.189.143.63:37120,3.8.243.72:37121,85.247.12.172:37122,46.189.143.63:37123")
+> sh.addShard("c/46.189.143.63:37130,3.8.243.72:37131,85.247.12.172:37132,46.189.143.63:37133")
+
+use mqttData
+db.createCollection("mazemov14")
+db.createCollection("mazetemp14")
+db.createCollection("mazelog14")
+db.createCollection("mazemanage14")
+db.createUser({user:"javaop",pwd:"javaop",roles:["readWrite"]})
+sh.enableSharding("mqttData")
+sh.shardCollection("mqttData.mazemanage14",{"numExp":"hashed"})
+sh.shardCollection("mqttData.mazelog14",{"Hora":"hashed"})
+sh.shardCollection("mqttData.mazemov14",{"numExp":"hashed"})
+sh.shardCollection("mqttData.mazetemp14",{"numExp":"hashed"})
+
+
+use teste
+db.createUser({user:"javaop",pwd:"javaop",roles:["readWrite"]})
+
+db.createCollection("hashed")
+sh.shardCollection("teste.hashed",{"numExp":"hashed"})
+
+db.createCollection("ranged")
+sh.addShardToZone("a","1")
+sh.updateZoneKeyRange("teste.ranged",{numExp:1}, {numExp:4}, "1")
+sh.addShardToZone("b","2")
+sh.updateZoneKeyRange("teste.ranged",{numExp:4}, {numExp:7}, "2")
+sh.addShardToZone("c","3")
+sh.updateZoneKeyRange("teste.ranged",{numExp:7}, {numExp:10}, "3")
+sh.shardCollection("teste.ranged",{numExp:1})
+sh.status()
+
+sh.updateZoneKeyRange("teste.ranged",{numExp:7}, {numExp:10}, null) --> apagar
+db.hashed.getShardDistribution()
+db.ranged.getShardDistribution()
+
+> correr programa
+> parar maquina 3 ou 4 e notar sequencia N1 
+
+
+db.hashed.find({$and:[{numExp: {$gt: N1-10}},{numExp:  {$lt: N1-10}}]}).sort({"numExp":1})
+db.ranged.find({$and:[{sequence: {$gt: N1-10}},{sequence:  {$lt: N1-10}}]}).sort({"sequence":1})
+
+
+------------------------- CONF GENÉRICO -----------------------------
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: /mongo/router1/log/logs.log
+
+net:
+  port: 37141
+  bindIp: 0.0.0.0
+
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+security:
+  keyFile: /mongo/keyfile
+
+
+setParameter:
+  enableLocalhostAuthBypass: true
+
+processManagement:
+  fork: true
+ 
+sharding:
+  configDB: cfg/46.189.143.63:37100,3.8.243.72:37101,85.247.12.172:37102,46.189.143.63:37103
+
+
+------------------------- FIM -----------------------------
+
+echo "rm -r /mongo/cfg0/data/* /mongo/a0/data/* /mongo/b0/data/* /mongo/c0/data/*" > /mongo/reset0.sh
+echo "find /mongo -type f -name \"logs.log\" -exec sh -c 'echo -n > \"{}\"' \\;" >> /mongo/reset0.sh

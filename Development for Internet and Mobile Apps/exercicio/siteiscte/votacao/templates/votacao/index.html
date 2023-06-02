@@ -1,0 +1,44 @@
+{% extends "./base.html"%}
+
+{% block titulo %}
+  index
+{% endblock %} 
+
+{% block private-css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'votacao/css/index.css'%}">
+<script src="{% static 'votacao/scripts/index.js'%}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+{% endblock %}
+
+{% block main-content %}
+            
+
+{% if latest_question_list %}
+<ul class="index-ul list" style="display: none;" id="questions-list">
+ {% for questao in latest_question_list %}
+ <li class="index-li list-item">
+ <a href="{% url 'votacao:detalhe' questao.id %}">
+  <span class="index-text">{{ questao.questao_texto }}</span>
+ </a>
+ </li>
+ {% endfor %}
+</ul>
+<button class="index-button button" id="toggle-questions-list">Mostrar questões</button>
+{% else %}
+<p>Nao ha questoes disponiveis.</p>
+{% endif %}
+     {% if request.user.is_superuser %}
+        <a href="{% url 'votacao:criarquestao' %}">
+          <div class="index-container">
+            <button class="index-button button">Adicionar Pergunta</button>
+          </div> </a>
+    {% endif %}
+
+    {% load static %}
+    <div class="slider">
+      <div><img src="{% static 'media/joao.jpg' %}" alt=""></div>
+      <div><img src="{% static 'media/joaocorreia.jpg' %}" alt=""></div>
+    </div>
+{% endblock %}

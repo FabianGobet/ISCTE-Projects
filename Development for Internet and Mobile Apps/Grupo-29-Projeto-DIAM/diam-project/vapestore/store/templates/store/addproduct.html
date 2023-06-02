@@ -1,0 +1,45 @@
+{% extends "./base.html" %}
+
+{% block title %} Adicionar Produto {% endblock %}
+{% block nav-bar-title %} Adicionar Produto {% endblock %}
+
+{% block main-content %}
+
+
+<form action="{% url 'store:addproduct' %}" method="post" class="mt-5" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="form-group mb-3">
+    <label for="name">Nome</label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa-solid fa-signature" style="color: #545454;font-size: 24px;"></i></span>
+          </div>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Nome">
+    </div>
+  </div>
+  <div class="form-group mb-3">
+    <label for="price">Preco Unidade</label>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa-solid fa-euro-sign" style="color: #545454;font-size: 24px;"></i></span>
+          </div>
+          <input type="number" class="form-control " id="price" placeholder="Preco Unidade" name="price">
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <label for="description">Descrição</label>
+    <textarea class="form-control " id="description" placeholder="Descrição sucinta do produto" name="description" rows="8"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="photo">Imagem</label>
+    <input type="file" class="form-control" id="photo" placeholder="Imagem" name="photo">
+  </div>
+
+  <button type="submit" class="btn btn-primary mt-4 mb-2">Adicionar produto</button>
+  <p class="text-danger">{{error_message}}</p>
+</form>
+
+{% endblock %}

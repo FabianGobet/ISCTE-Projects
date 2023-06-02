@@ -1,0 +1,57 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block custom-imports %}
+<script src="{% static 'scripts/reserveslist.js' %}"></script>
+{% endblock %}
+
+{% block title %} Lista de Reservas{% endblock %}
+{% block nav-bar-title %} Lista de Reservas {% endblock %}
+
+{% block main-content %}
+
+<body>
+    <div class="container mt-3">
+      <h1 class="mb-5">Reservas</h1>
+
+      <div class="filter-buttons mb-3">
+        <button class="btn btn-primary filter-button" data-filter="all">All</button>
+        <button class="btn btn-primary filter-button" data-filter="pago">Pago</button>
+        <button class="btn btn-primary filter-button" data-filter="nao-pago">Não Pago</button>
+      </div>
+
+      <table class="table table-hover" id="myTable" 
+      data-toggle="table" 
+      data-pagination="true" 
+      data-page-size="10" 
+      data-pagination-loop="false"
+      data-sortable="true"
+      data-search="true">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th data-sortable="true">Data</th>
+            <th data-sortable="true">Preco Total</th>
+            <th>EnderecoAlternativo</th>
+            <th data-sortable="true">Pago</th>
+            <th>Detalhes</th>
+          </tr>
+        </thead>
+        <tbody id="items-table-body">
+          {% for x in reserva %}
+          <tr> 
+              <td>{{ x.id}}</td> 
+              <td>{{ x.Cliente.User.username }}</td>
+              <td data-date="{{ x.Data|date:'Y-m-d H:i:s' }}">{{ x.Data }}</td>
+              <td>{{ x.PrecoTotal }}</td>
+              <td>{{ x.EnderecoAlternativo }}</td>
+              <td class = "pago">{% if x.Pago %} Sim {% else %} Nao {% endif %}</td>
+                <td><a href="{% url 'store:reservedetails' x.id %}">Ver</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+  
+{% endblock %}

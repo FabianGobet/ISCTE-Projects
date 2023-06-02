@@ -1,0 +1,204 @@
+html {
+  font-family: Inter;
+  font-size: 16px;
+}
+
+body {
+  font-weight: 400;
+  font-style:normal;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.15;
+  color: #000000;;
+  background-color: #FFFFFF;
+  margin: 0;
+}
+
+.button {
+  color: #000000;;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-color: #000000;;
+  border-width: 1px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+}
+.input {
+  color: #000000;;
+  cursor: auto;
+  padding: 0.5rem 1rem;
+  border-color: #000000;;
+  border-width: 1px;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+}
+
+.registar-meuperfil-container {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registar-meuperfil-head {
+  flex: 1;
+  height: 20%;
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  justify-content: space-between;
+  background-color: #080c65;
+}
+.registar-meuperfil-left {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.registar-meuperfil-banneriscte {
+  width: 394px;
+  height: 86px;
+  align-self: center;
+  object-fit: cover;
+}
+.registar-meuperfil-diam {
+  color: #ffffff;
+  align-self: center;
+}
+.registar-meuperfil-content {
+  flex: 6;
+  width: 100%;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  padding-top: 96px;
+  flex-direction: row;
+  padding-bottom: 96px;
+  justify-content: center;
+}
+
+.registar-meuperfil-container1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registar-meuperfil-image {
+  width: 157px;
+  height: 170px;
+  align-self: center;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+.registar-meuperfil-button {
+  align-self: center;
+}
+.registar-meuperfil-form {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  margin-left: 48px;
+  margin-right: 48px;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.registar-meuperfil-form-entry-combo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registar-meuperfil-username-label {
+  margin-bottom: 8px;
+}
+.registar-meuperfil-username-input {
+  align-self: center;
+  text-align: center;
+}
+.registar-meuperfil-form-entry-combo1 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registar-meuperfil-password-label {
+  margin-bottom: 8px;
+}
+.registar-meuperfil-password-input {
+  align-self: center;
+  text-align: center;
+}
+.registar-meuperfil-form-entry-combo2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registar-meuperfil-email-label {
+  margin-bottom: 8px;
+}
+.registar-meuperfil-email-input {
+  align-self: center;
+  text-align: center;
+}
+.registar-meuperfil-form-entry-combo3 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.registar-meuperfil-curso-label {
+  margin-bottom: 8px;
+}
+.registar-meuperfil-curso-input {
+  align-self: center;
+  text-align: center;
+}
+.registar-meuperfil-entrar {
+  color: #ffffff;
+  transition: 0.3s;
+  margin-bottom: 8px;
+  background-color: #14A9FF;
+}
+.registar-meuperfil-entrar:hover {
+  background-color: #080c65;
+}
+.registar-meuperfil-text4 {
+  color: #ffffff;
+}
+
+.registar-meuperfil-container3 {
+  flex: 0 0 auto;
+  width: 200px;
+  display: flex;
+  align-items: flex-start;
+  margin-left: 32px;
+  margin-right: 32px;
+  flex-direction: column;
+}
+.registar-meuperfil-image {
+  width: 157px;
+  height: 170px;
+  align-self: center;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+.registar-meuperfil-textinput {
+  align-self: stretch;
+  text-align: center;
+}

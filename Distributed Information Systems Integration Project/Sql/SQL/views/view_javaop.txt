@@ -1,0 +1,25 @@
+CREATE VIEW javaop AS
+(SELECT 
+	e.Id as id_experiencia,
+    e.DataHoraInicio as data_hora_inicio,
+	e.DataHoraFim as data_hora_fim,
+	e.TemperaturaIdeal as temperatura_ideal, 
+    e.VariacaoTemperaturaMaxima as variacao_temperatura, 
+    pj.fator_alerta_vermelho, 
+    pj.fator_alerta_laranja,
+    pj.fator_alerta_amarelho,
+    pj.num_sensores,
+    pj.fator_periodicidade,
+    pj.tempo_max_periodicidade,
+    pj.fator_tamanho_outlier_sample,
+    pj.temperatura_maxima,
+    pj.temperatura_minima,
+    pj.tempo_entre_experiencia,
+    pj.segundos_abertura_portas_exterior
+FROM experiencia e, parametrosjavaop pj
+WHERE e.Anulada = 0 and e.Populada = 0 and e.DataHoraInicio <= current_timestamp() and e.DataHoraInicio >= all (
+	SELECT tempexp.DataHoraInicio 
+	FROM micelab.experiencia tempexp 
+	WHERE tempexp.Anulada = 0 and tempexp.Populada = 0 and tempexp.DataHoraInicio <= current_timestamp()
+	)
+LIMIT 1);

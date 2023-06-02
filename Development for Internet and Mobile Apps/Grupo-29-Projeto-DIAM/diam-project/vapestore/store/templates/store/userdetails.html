@@ -1,0 +1,87 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block title %} Os meus detalhes {% endblock %}
+{% block nav-bar-title %} Os meus detalhes {% endblock %}
+{% block custom-imports %}
+<script src="{% static 'scripts/userdetails.js' %}"></script>
+{% endblock %}
+{% block main-content %}
+
+
+
+<div class="container-fuild">
+    <form action="{% url 'store:alteruserdetails' %}" method="post" class="mt-5" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row justify-content-between mt-6">
+
+            <div class="col-md-5">
+                <div class="form-group mb-3">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa-solid fa-user"
+                                    style="color: #545454;font-size: 24px;"></i></span>
+                        </div>
+
+                        <input type="text" class="form-control" id="username" value="{{usr.username}}" name="username"
+                            disabled>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="address">Endereço</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa-solid fa-house"
+                                    style="color: #545454;font-size: 24px;"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="address" value="{{userExt.Endereco}}"
+                            name="address">
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa-solid fa-envelope"
+                                    style="color: #545454;font-size: 24px;"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="email" value="{{usr.email}}" name="email">
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="contact">Nr. de contacto</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa-solid fa-phone"
+                                    style="color: #545454;font-size: 24px;"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="contact" name="contact" value="{{userExt.Phone}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 ml-4">
+                <label for="photo">Foto</label><br>
+                <figure class="figure">
+                    <img src="{% static userExt.Imagem %}" id="output" class="rounded img-fluid" style="max-width: 50vh; max-height: 50vh"
+                        alt="No image available">
+                </figure>
+                <div class="form-group mb-3">
+                    <button type="button" id="image-button-shown" class="btn btn-secondary btn-sm">Carregar imagem</button>
+                    <span class="label label-default" id="image-text" style="font-size:80%">Nenhuma imagem carregada...</span>
+                    <input type="file"  accept="image/*" class="form-control d-none" id="photo" placeholder="Foto" name="photo">
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-center mt-6">
+            <button type="submit" class="btn btn-primary col-2 mt-5 mb-2">Alterar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

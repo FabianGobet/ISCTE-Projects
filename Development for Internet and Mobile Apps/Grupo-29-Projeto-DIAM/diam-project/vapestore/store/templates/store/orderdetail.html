@@ -1,0 +1,58 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block custom-imports %}
+{% endblock %}
+
+{% block title %} Venda {% endblock %}
+{% block nav-bar-title %} Venda {% endblock %}
+
+{% block main-content %}
+<div class="container-fuild">
+    <div class="row justify-content-between mt-6">
+        <div class="col-md-7">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preco Unidade</th>
+                <th scope="col">Preco Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for item in pe %}
+            
+              <tr>
+                <td><img src="{% static item.Produto.Imagem %}" id="output" class="rounded img-fluid" style="max-width: 7vh; max-height: 7vh"
+                    alt="No image available"></td>
+                <td>{{ item.Produto.Nome }}</td>
+                <td>{{ item.Quantidade }}</td>
+                <td>{{ item.Preco_Unidade }}</td>
+                <td>{{ item.Total }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-5 pl-3" style="padding-left: 8vh; padding-top: 8vh">
+            <div class="border rounded p-4 border-dark" style="max-width: 50vh">
+                <h1 style="font-size: 10vh">Total: {{ v.Preco_Total }}€</h1>
+                <br>
+                <p class="h6">Recibo:</p>
+                <div class="border rounded p-4 border-dark" style="max-width: 40vh"> {{enc.Recibo}} </div>
+                <div class="mt-2">
+                {% if not enc.Recebido %}
+                <a href="{% url 'store:received' enc.id %}"><button type="submit" class="btn btn-warning mt-3"><b>Marcar como recebido</b></button></a>
+                </form>
+                {% else %}
+                <p class="text-success"><b>
+                Recebido
+                {% endif %}
+                </b></p></div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

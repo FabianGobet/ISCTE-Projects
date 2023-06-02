@@ -1,0 +1,134 @@
+.detalhepergunta-text {
+  font-size: 35px;
+  margin-top: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-bottom: 24px;
+}
+.detalhepergunta-container2 {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.detalhepergunta-ul {
+  flex: 8;
+}
+.detalhepergunta-li {
+  margin-bottom: 16px;
+}
+.detalhepergunta-text1 {
+  font-size: 20px;
+  margin-right: 16px;
+}
+.detalhepergunta-radiobutton {
+  margin-right: 16px;
+}
+.detalhepergunta-text2 {
+  font-size: 20px;
+}
+.detalhepergunta-button {
+  color: #FFFFFF;
+  width: auto;
+  height: auto;
+  font-style: normal;
+  transition: 0.3s;
+  font-weight: 900;
+  margin-left: 32px;
+  background-color: #ec8585;
+}
+.detalhepergunta-button:hover {
+  background-color: #f13838;
+}
+.detalhepergunta-li1 {
+  margin-bottom: 16px;
+}
+.detalhepergunta-text3 {
+  font-size: 20px;
+  margin-right: 16px;
+}
+.detalhepergunta-radiobutton1 {
+  margin-right: 16px;
+}
+.detalhepergunta-text4 {
+  font-size: 20px;
+}
+.detalhepergunta-button1 {
+  color: #FFFFFF;
+  width: auto;
+  height: auto;
+  font-style: normal;
+  transition: 0.3s;
+  font-weight: 900;
+  margin-left: 32px;
+  background-color: #ec8585;
+}
+.detalhepergunta-button1:hover {
+  background-color: #f13838;
+}
+.detalhepergunta-li2 {
+  margin-bottom: 16px;
+}
+.detalhepergunta-text5 {
+  font-size: 20px;
+  margin-right: 16px;
+}
+.detalhepergunta-radiobutton2 {
+  margin-right: 16px;
+}
+.detalhepergunta-text6 {
+  font-size: 20px;
+}
+.detalhepergunta-button2 {
+  color: #FFFFFF;
+  width: auto;
+  height: auto;
+  font-style: normal;
+  transition: 0.3s;
+  font-weight: 900;
+  margin-left: 32px;
+  background-color: #ec8585;
+}
+.detalhepergunta-button2:hover {
+  background-color: #f13838;
+}
+.detalhepergunta-container3 {
+  flex: 3;
+  width: 200px;
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+.detalhepergunta-button3 {
+  color: #FFFFFF;
+  transition: 0.3s;
+  margin-bottom: 16px;
+  background-color: #4CC366 !important;
+}
+.detalhepergunta-button3:hover {
+  background-color: #199033 !important;
+}
+
+.detalhepergunta-button4 {
+  color: #FFFFFF;
+  transition: 0.3s;
+  border-color: #000000;
+  margin-bottom: 16px;
+  background-color: #14A9FF;
+}
+.detalhepergunta-button4:hover {
+  border-color: #000000;
+  background-color: #080c65;
+}
+
+.detalhepergunta-button5 {
+  color: #FFFFFF;
+  transition: 0.3s;
+  margin-bottom: 16px;
+  background-color: #ec8585 !important;
+}
+.detalhepergunta-button5:hover {
+  background-color: #f13838 !important;
+}

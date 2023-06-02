@@ -1,0 +1,19 @@
+https://www.youtube.com/watch?v=QD5J8YvQPPM
+
+EXEC C:\Users\WorkStation\src\sonarqube\bin\windows-x86-64\startSonar.bat
+admin:abc123;:_
+
+> create new project>manually
+> definir project name e key e gravar os nomes -> ES-2023-2Sem-Quarta-Feira-LEI-GrupoG
+> analyze manually > token name -> Analyze "ES-2023-2Sem-Quarta-Feira-LEI-GrupoG" 1: sqp_2155d0533269d0017823116dbd72a87c21e49728
+> other options > windows
+
+> flutter test --coverage
+> sonar-scanner.bat -D"sonar.token=sqp_2155d0533269d0017823116dbd72a87c21e49728"
+> download sonarscanner e por o bin na path
+> https://github.com/insideapp-oss/sonar-flutter download latest .jar
+> por extensao .jar em C:\Users\WorkStation\src\sonarqube\extensions\plugins
+> restart server
+
+
+sonar-scanner.bat -D"sonar.projectKey=ES-2023-2Sem-Quarta-Feira-LEI-GrupoG" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.token=sqp_2155d0533269d0017823116dbd72a87c21e49728"

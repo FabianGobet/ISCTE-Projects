@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>registar-meuperfil - RAW-DIAM</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'votacao/css/registar-meuperfil.css'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{% static 'votacao/scripts/registar.js'%}"></script>
+  </head>
+  <body>
+    <div>
+      <header class="registar-meuperfil-container">
+        <header data-thq="thq-navbar" class="registar-meuperfil-head">
+          <div class="registar-meuperfil-left">
+            <img
+              alt="image"
+              src="{% static 'votacao/images/isc-200h.png' %}"
+              class="registar-meuperfil-banneriscte"
+            />
+            <span class="registar-meuperfil-diam">DIAM 22/23 - grupo 29</span>
+          </div>
+        </header>
+        <div class="registar-meuperfil-content">
+          <form class="registar-meuperfil-form">
+            {% csrf_token %}
+            <div class="registar-meuperfil-container1">
+            <div class="registar-meuperfil-form-entry-combo">
+              <label
+                for="username-input"
+                class="registar-meuperfil-username-label"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username-input"
+                required=""
+                placeholder="Escreva username aqui"
+                class="registar-meuperfil-username-input input"
+              />
+            </div>
+            <div class="registar-meuperfil-form-entry-combo1">
+              <label
+                for="password-input"
+                class="registar-meuperfil-password-label"
+              >
+                Password
+              </label>
+              <input
+                type="text"
+                id="password-input"
+                required=""
+                placeholder="Escreva password aqui"
+                class="registar-meuperfil-password-input input"
+              />
+            </div>
+            <div class="registar-meuperfil-form-entry-combo2">
+              <label for="email-input" class="registar-meuperfil-email-label">
+                Email
+              </label>
+              <input
+                type="text"
+                id="email-input"
+                required=""
+                placeholder="Escreva email aqui"
+                class="registar-meuperfil-email-input input"
+              />
+            </div>
+            <div class="registar-meuperfil-form-entry-combo3">
+              <label for="curso-input" class="registar-meuperfil-curso-label">
+                Curso
+              </label>
+              <input
+                type="text"
+                id="curso-input"
+                required=""
+                placeholder="Escreva curso aqui"
+                class="registar-meuperfil-curso-input input"
+              />
+            </div>
+            <div class="registar-meuperfil-form-entry-combo3">
+              <label for="comment-input" class="registar-meuperfil-curso-label">
+                Comentário
+              </label>
+              <input
+                type="text"
+                id="comment-input"
+                placeholder="Escreva comentários aqui"
+                class="registar-meuperfil-curso-input input"
+              />
+              <span id="comment-status"></span>
+            </div>
+            <button id="validate-comment" type="button" class="registar-meuperfil-entrar button">
+              <span>
+                <span class="registar-meuperfil-text4">Validar comentário</span>
+                <br />
+              </span>
+            </button>
+            <button type="submit" class="registar-meuperfil-entrar button">
+              <span>
+                <span class="registar-meuperfil-text4">Registar</span>
+                <br />
+              </span>
+            </button>
+          </div>
+          <div class="registar-meuperfil-container3">
+            <img
+              alt="image"
+              src="https://play.teleporthq.io/static/svg/default-img.svg"
+              class="registar-meuperfil-image"
+            />
+            <input
+              type="file"
+              name="user-image"
+              placeholder="placeholder"
+              class="registar-meuperfil-textinput input"
+            />
+          </div>
+          </form>
+        </div>
+      </header>
+    </div>
+  </body>
+</html>

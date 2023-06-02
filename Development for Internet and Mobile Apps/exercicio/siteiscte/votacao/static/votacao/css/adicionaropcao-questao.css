@@ -1,0 +1,22 @@
+.adicionaropcao-questao-form {
+  margin: 5%;
+  flex: 1;
+  width: 70%;
+  height: 100px;
+  display: flex;
+  align-self: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: center;
+}
+.adicionaropcao-questao-label {
+  margin-bottom: 8px;
+}
+.adicionaropcao-questao-input {
+  margin-bottom: 16px;
+}
+.adicionaropcao-questao-button {
+  align-self: flex-start;
+  transition: 0.3s;
+  margin-bottom: 16px;
+}

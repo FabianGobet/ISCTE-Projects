@@ -1,0 +1,58 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block custom-imports %}
+{% endblock %}
+
+{% block title %} Carrinho {% endblock %}
+{% block nav-bar-title %} Carrinho {% endblock %}
+
+{% block main-content %}
+
+<div class="container-fuild">
+    <div class="row justify-content-between mt-6">
+        <div class="col-md-7">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Produto</th>
+                <th scope="col">Preço Unidade</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preço</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for item in products %}
+            
+              <tr>
+                <td><img src="{% static item.Imagem %}" id="output" class="rounded img-fluid" style="max-width: 7vh; max-height: 7vh"
+                    alt="No image available"></td>
+                <td>{{ item.Nome }}</td>
+                <td>{{ item.Preco_Unidade }} €</td>
+                <td>{{ item.Quantidade }} </td>
+                <td>{{ item.total }} €</td>
+                <td><a href="{% url 'store:removefromcart' item.id %}" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></a> </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-5 pl-3" style="padding-left: 8vh; padding-top: 8vh">
+            <div class="border rounded p-4 border-dark col-md-12">
+                <h1 style="font-size: 10vh">Total: {{ total }} €</h1>
+              </div>
+
+              <form class="form-group mt-3" action="{% url 'store:addreserve' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="total" id="total" style="display: none;" value="{{ total }}">
+                <label for="address">Endereço de envio</label>
+                <textarea class="form-control col-md-12 mt-2" name="address" id="address" rows="5">{{user.Endereco}}</textarea>
+                <button class="btn btn-primary mt-5 col-md-12"> {% if request.user.is_authenticated %} Fazer reserva {% else %} Necessita ter login efetuado {% endif %}</span>
+              </form>
+              
+              
+        </div>
+    </div>
+</div>
+{% endblock %}

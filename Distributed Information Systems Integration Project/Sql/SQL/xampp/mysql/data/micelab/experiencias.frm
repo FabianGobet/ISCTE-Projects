@@ -1,0 +1,16 @@
+TYPE=VIEW
+query=select `e`.`Id` AS `Id`,`e`.`Descricao` AS `Descricao`,`e`.`Investigador` AS `Investigador`,`e`.`DataHoraInicio` AS `DataHoraInicio`,`e`.`NumeroRatos` AS `NumeroRatos`,`e`.`LimiteRatosSala` AS `LimiteRatosSala`,`e`.`SegundosSemMovimento` AS `SegundosSemMovimento`,`e`.`VariacaoTemperaturaMaxima` AS `VariacaoTemperaturaMaxima`,`e`.`TemperaturaIdeal` AS `TemperaturaIdeal`,`e`.`DataHoraFim` AS `DataHoraFim` from `micelab`.`experiencia` `e` where `e`.`Anulada` <> 1
+md5=e7c4a308375e9cbb19be4140cff7584d
+updatable=1
+algorithm=0
+definer_user=root
+definer_host=localhost
+suid=1
+with_check_option=0
+timestamp=0001684088299508478
+create-version=2
+source=SELECT `e`.`Id` AS `Id`, `e`.`Descricao` AS `Descricao`, `e`.`Investigador` AS `Investigador`, `e`.`DataHoraInicio` AS `DataHoraInicio`, `e`.`NumeroRatos` AS `NumeroRatos`, `e`.`LimiteRatosSala` AS `LimiteRatosSala`, `e`.`SegundosSemMovimento` AS `SegundosSemMovimento`, `e`.`VariacaoTemperaturaMaxima` AS `VariacaoTemperaturaMaxima`, `e`.`TemperaturaIdeal` AS `TemperaturaIdeal`, `e`.`DataHoraFim` AS `DataHoraFim` FROM `experiencia` AS `e` WHERE `e`.`Anulada` <> 1
+client_cs_name=utf8mb4
+connection_cl_name=utf8mb4_general_ci
+view_body_utf8=select `e`.`Id` AS `Id`,`e`.`Descricao` AS `Descricao`,`e`.`Investigador` AS `Investigador`,`e`.`DataHoraInicio` AS `DataHoraInicio`,`e`.`NumeroRatos` AS `NumeroRatos`,`e`.`LimiteRatosSala` AS `LimiteRatosSala`,`e`.`SegundosSemMovimento` AS `SegundosSemMovimento`,`e`.`VariacaoTemperaturaMaxima` AS `VariacaoTemperaturaMaxima`,`e`.`TemperaturaIdeal` AS `TemperaturaIdeal`,`e`.`DataHoraFim` AS `DataHoraFim` from `micelab`.`experiencia` `e` where `e`.`Anulada` <> 1
+mariadb-version=100427
